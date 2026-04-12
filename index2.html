@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מלכה - בוטיק טיפולי יופי</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blush: #f9e8e3;
+    --rose: #f2c9c0;
+    --rose-mid: #e8b4a8;
+    --rose-deep: #d4897a;
+    --nude: #f5ede9;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --text-soft: #c8a49a;
+    --text-dark: #4a2e28;
+    --white: #fffaf8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--blush);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #fff5f2 0%, #fce8e2 40%, #f5d5cc 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(242,201,192,0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(249,232,227,0.6) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .petal {
+    position: absolute;
+    border-radius: 50% 10% 50% 10%;
+    opacity: 0.18;
+    animation: floatPetal linear infinite;
+  }
+  .petal:nth-child(1)  { width:50px; height:70px; background:var(--rose-deep); top:10%; left:5%; animation-duration:12s; animation-delay:0s; }
+  .petal:nth-child(2)  { width:35px; height:55px; background:var(--rose-mid); top:70%; left:8%; animation-duration:15s; animation-delay:-4s; }
+  .petal:nth-child(3)  { width:45px; height:65px; background:var(--rose); top:30%; right:6%; animation-duration:11s; animation-delay:-2s; }
+  .petal:nth-child(4)  { width:30px; height:45px; background:var(--rose-deep); top:80%; right:10%; animation-duration:14s; animation-delay:-7s; }
+  .petal:nth-child(5)  { width:40px; height:60px; background:var(--rose-mid); top:50%; left:3%; animation-duration:13s; animation-delay:-3s; }
+  .petal:nth-child(6)  { width:25px; height:40px; background:var(--rose); top:20%; right:15%; animation-duration:16s; animation-delay:-9s; }
+
+  @keyframes floatPetal {
+    0%   { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(-30px) rotate(20deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  .logo-wrap {
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeDown 1.2s ease forwards 0.3s;
+  }
+
+  .logo-wrap img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(201,169,110,0.4);
+    box-shadow: 0 8px 40px rgba(212,137,122,0.25), 0 0 0 8px rgba(249,232,227,0.6);
+    transition: transform 0.4s ease;
+  }
+
+  .logo-wrap img:hover { transform: scale(1.04); }
+
+  .hero-title {
+    margin-top: 32px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 400;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  .hero-sub {
+    margin-top: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: var(--text-soft);
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.3s;
+  }
+
+  .hero-divider {
+    margin: 28px auto;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.6s;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 80px 20px; }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 400;
+    color: var(--rose-deep);
+    margin-bottom: 10px;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 48px;
+  }
+
+  /* ─── TREATMENTS ─── */
+  .treatments {
+    background: var(--white);
+  }
+
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .treatment-card {
+    background: linear-gradient(135deg, #fff8f6, #fdeee9);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 18px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .treatment-card.visible {
+    animation: popUp 0.6s ease forwards;
+  }
+
+  .treatment-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242,201,192,0.5), transparent);
+  }
+
+  .treatment-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(212,137,122,0.2);
+  }
+
+  .treatment-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--rose-deep);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .treatment-desc {
+    font-size: 0.92rem;
+    color: #7a5a54;
+    line-height: 1.7;
+  }
+
+  .treatments-closing {
+    text-align: center;
+    margin-top: 48px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--rose-deep);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── WHY CHOOSE ─── */
+  .why {
+    background: linear-gradient(160deg, #fce8e2 0%, #f9e4de 100%);
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201,169,110,0.25);
+    border-radius: 20px;
+    padding: 32px 20px;
+    text-align: center;
+    cursor: default;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(212,137,122,0.1);
+  }
+
+  .why-card.visible {
+    animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+
+  .why-card:hover {
+    transform: scale(1.05) translateY(-4px);
+    box-shadow: 0 16px 40px rgba(212,137,122,0.25);
+  }
+
+  .why-icon {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .why-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--rose-deep);
+    font-weight: 500;
+  }
+
+  /* ─── PRODUCTS BANNER ─── */
+  .products-banner {
+    background: linear-gradient(135deg, #f5d5cc, #e8c4b8);
+    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .products-banner::before {
+    content: '✦';
+    position: absolute;
+    font-size: 200px;
+    color: rgba(255,255,255,0.12);
+    top: -40px; left: -40px;
+  }
+
+  .products-banner::after {
+    content: '✦';
+    position: absolute;
+    font-size: 200px;
+    color: rgba(255,255,255,0.12);
+    bottom: -60px; right: -40px;
+  }
+
+  .products-banner .section-title { color: var(--white); }
+  .products-banner .section-line { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent); }
+
+  .products-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: rgba(255,255,255,0.95);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  /* ─── GALLERY ─── */
+  .gallery-section { background: var(--white); }
+
+  .slider-wrap {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 12px 50px rgba(212,137,122,0.18);
+  }
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  .slide-item {
+    min-width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #fce8e2, #f5d5cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--text-soft);
+  }
+
+  .slide-placeholder .ph-icon { font-size: 3rem; }
+  .slide-placeholder p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+  }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    color: var(--rose-deep);
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10;
+  }
+
+  .slider-btn:hover { background: var(--white); transform: translateY(-50%) scale(1.1); }
+  .slider-btn.prev { left: 14px; }
+  .slider-btn.next { right: 14px; }
+
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rose-mid);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .dot.active { opacity: 1; background: var(--rose-deep); transform: scale(1.3); }
+
+  .gallery-label {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-soft);
+    margin-bottom: 24px;
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials { background: linear-gradient(160deg, #fce8e2, #f9e0d8); }
+
+  .testi-slide-item {
+    min-width: 100%;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.5);
+  }
+
+  .stars { color: var(--gold); font-size: 1.4rem; letter-spacing: 4px; }
+
+  .testi-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: #5a3a34;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  .testi-author {
+    font-size: 0.85rem;
+    color: var(--rose-deep);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact { background: var(--white); }
+
+  .contact-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #fff8f6, #fdeee9);
+    border-radius: 28px;
+    padding: 48px 40px;
+    border: 1px solid rgba(201,169,110,0.2);
+    box-shadow: 0 16px 60px rgba(212,137,122,0.14);
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--rose-deep);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  input, textarea, select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(201,169,110,0.3);
+    border-radius: 12px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    direction: rtl;
+  }
+
+  input:focus, textarea:focus {
+    border-color: var(--rose-deep);
+    box-shadow: 0 0 0 3px rgba(212,137,122,0.12);
+  }
+
+  textarea { height: 120px; resize: vertical; }
+
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--rose-mid), var(--rose-deep));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 24px rgba(212,137,122,0.35);
+    margin-top: 8px;
+  }
+
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(212,137,122,0.45);
+  }
+
+  .whatsapp-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.88rem;
+    color: var(--text-soft);
+  }
+
+  .whatsapp-note a {
+    color: var(--rose-deep);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: linear-gradient(135deg, #e8c4b8, #d4a99a);
+    text-align: center;
+    padding: 40px 20px;
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+
+  footer .gold { color: var(--gold-light); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 600px) {
+    .logo-wrap img { width: 160px; height: 160px; }
+    .contact-inner { padding: 32px 22px; }
+    .testi-slide-item { padding: 32px 20px; }
+    .slider-btn { width: 36px; height: 36px; font-size: 1rem; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+  <div class="petal"></div>
+
+  <div class="logo-wrap">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAH0AfQDASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAAAAECBAMF/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAECA//aAAwDAQACEAMQAAAC9UY6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACxVdZRcUEoAABNkouqi8RUstV1lFxRessAAAAAAAAAAAAAAAAAAAvatrkClenOUFAAvaJuQI53ooS9JibkDnBNAAAAAAAAAAAAAAAAAAAXIsuEc+lVoJQExdFufSwCtL0UJekxNyByE0AAAAAAAAAAAAAAAAAIJZ5NVOFbNs1siJynTHXoui+bTKvCyOnPoAlaXooS9JibkecbBNAAAAAAAAAAAAAAAADGXdroC38vZ51z6/TLxWel9CV8n0sRuE1elL2T0z6AErS9FCXpMTc5OmT0q5DOhQurYAAAAAAAAAAAAAFTjM9kBRyPNzu2sbe3PVNdTOmL0s3QvbPVeequI6+jm6J1ZdRWl6KEvTNp8651aGE0mSa14dfj2e2jPLpUzmtEgqWcuoAAAAAAAAApcZ9AAPF9HlZtzbaAS387ppue3m+kPM7bKGfJ6SXNGvpZ5264rS9FIxS23eXr1ntg0ymfLtmamenSOOT0Rix+wpJKpcZ9AAAAAAAAAAAAAc+gXpeliJS4/Q52suEjneihLPTn0sBK0vRfM0ax0mJQDkJrneQBaL0sgSgAAAAAAAAAAAAACxNbxZRMSpgdVZuaQTQkdKzcygRTpValpbTC5lA5rpaLilpmp53oQJQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACAAMAAAAh++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++99++++397+99y+++++++++++++++++++jCX+++DCd+jCe+++++++++++++++++++QCA++7pC9+DC++++++++++++++++++62YjW0+1AC9+DC+++++++++++++++++6X+LMiz+1AC9+Dg+6+++++++++++++++z++JFGitRnK9+CC68y+2+6++++++++++++0k+/S/fxC96MNM3/U++++++++++++++++V+cC1+AC9tDC+++c+++++++++++++++6s2uLe6NO4+POzz0I++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++/9oADAMBAAIAAwAAABAEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEIAAkEEEMAcYAAoEEEEEEEEEEEEEEEEEEHT+MEEFz8AFT+kEEEEEEEEEEEEEEEEEEFP/oEEd/8AABU/pBBBBBBBBBBBBBBBBBBGp0/jKQW/ABUupBBBBBBBBBBBBBBBBCzB9yedFQ2/ABUcpFJBBBBBBBBBBBBBFnBFwE3TQQ53ABTemDOCJFEBBBBBBBBBBiBP9BOutDvuACoxeLjDhBiBBBBBBBBBBBBB8BF/gB+/AxU/phBxBBBBBBBBBBBBBBBGDBBwhF/9FG89jDJ7BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB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" alt="Malka Lashes Logo">
+  </div>
+
+  <h1 class="hero-title">מלכה — בוטיק למגוון טיפולי יופי וטיפוח</h1>
+  <p class="hero-sub">טבעי. פשוט. שלמות.</p>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- ─── TREATMENTS ─── -->
+<section class="treatments">
+  <h2 class="section-title">מה הטיפולים בקליניקה?</h2>
+  <div class="section-line"></div>
+  <div class="treatments-grid" id="treatGrid">
+    <div class="treatment-card">
+      <div class="treatment-name">✦ הרמת ריסים</div>
+      <div class="treatment-desc">ריסים טבעיים בלבד לקבלת מראה פתוח, מודגש וטבעי שמחמיא לכל סוגי העיניים.</div>
+    </div>
+    <div class="treatment-card">
+      <div class="treatment-name">✦ הרמת גבות</div>
+      <div class="treatment-desc">למראה מלא, שופע, מסודר וסימטרי — להדגשת העיניים ויצירת מבט פתוח ומרענן.</div>
+    </div>
+    <div class="treatment-card">
+      <div class="treatment-name">✦ עיצוב גבות</div>
+      <div class="treatment-desc">עיצוב בהתאמה נכונה שמתאימה ומחמיאה למבנה הפנים הייחודי שלך.</div>
+    </div>
+    <div class="treatment-card">
+      <div class="treatment-name">✦ שיקום גבות טבעיות</div>
+      <div class="treatment-desc">תהליך משותף של דיוק, סבלנות והתמדה למימוש הפוטנציאל המלא של הגבות שלך.</div>
+    </div>
+    <div class="treatment-card">
+      <div class="treatment-name">✦ צביעת ריסים וגבות</div>
+      <div class="treatment-desc">צביעה שמעניקה מראה מודגש ורענן לאורך זמן — ללא צורך באיפור יומיומי.</div>
+    </div>
+    <div class="treatment-card">
+      <div class="treatment-name">✦ שעוות פנים וגוף</div>
+      <div class="treatment-desc">טיפול שנעשה באופן עדין ומקצועי לתוצאות חלקות ומושלמות שנשמרות לאורך זמן.</div>
+    </div>
+  </div>
+  <p class="treatments-closing">שיופי, פינוק, מקצועיות, תשוקה ואיכות נפגשים ✦</p>
+</section>
+
+<!-- ─── WHY CHOOSE ─── -->
+<section class="why">
+  <h2 class="section-title">למה לבחור דווקא בי?</h2>
+  <div class="section-line"></div>
+  <div class="why-grid" id="whyGrid">
+    <div class="why-card">
+      <div class="why-icon">🤍</div>
+      <div class="why-text">יחס אישי</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <div class="why-text">תיאום ציפיות</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⭐</div>
+      <div class="why-text">מקצועיות</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💎</div>
+      <div class="why-text">חומרים איכותיים</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">✨</div>
+      <div class="why-text">דיוק מקסימלי</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌸</div>
+      <div class="why-text">מגוון טיפולים במקום אחד</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🕊️</div>
+      <div class="why-text">אווירה נעימה ורגועה</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PRODUCTS BANNER ─── -->
+<section class="products-banner">
+  <h2 class="section-title">גם זה אצלנו</h2>
+  <div class="section-line"></div>
+  <p class="products-text">
+    בנוסף ניתן למצוא בקליניקה מוצרי עיצוב, שיקום וטיפוח<br>
+    ומגוון תכשיטי כסף וגולדפיד מהממים שנעשו בעבודת יד 🌿
+  </p>
+</section>
+
+<!-- ─── WORK GALLERY ─── -->
+<section class="gallery-section">
+  <h2 class="section-title">גלריית עבודות</h2>
+  <div class="section-line"></div>
+  <p class="gallery-label">החלק ימינה ושמאלה לצפייה בתמונות</p>
+  <div class="slider-wrap" id="workSlider">
+    <div class="slider-track" id="workTrack">
+      <div class="slide-item">
+        <div class="slide-placeholder">
+          <div class="ph-icon">🌸</div>
+          <p>תמונת עבודה 1</p>
+        </div>
+      </div>
+      <div class="slide-item">
+        <div class="slide-placeholder">
+          <div class="ph-icon">🌸</div>
+          <p>תמונת עבודה 2</p>
+        </div>
+      </div>
+      <div class="slide-item">
+        <div class="slide-placeholder">
+          <div class="ph-icon">🌸</div>
+          <p>תמונת עבודה 3</p>
+        </div>
+      </div>
+    </div>
+    <button class="slider-btn prev" onclick="slide('work',-1)">&#8250;</button>
+    <button class="slider-btn next" onclick="slide('work',1)">&#8249;</button>
+  </div>
+  <div class="slider-dots" id="workDots">
+    <div class="dot active" onclick="goTo('work',0)"></div>
+    <div class="dot" onclick="goTo('work',1)"></div>
+    <div class="dot" onclick="goTo('work',2)"></div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials">
+  <h2 class="section-title">פרגונים וחוות דעת</h2>
+  <div class="section-line"></div>
+  <p class="gallery-label">החלק ימינה ושמאלה</p>
+  <div class="slider-wrap" id="testiSlider">
+    <div class="slider-track" id="testiTrack">
+      <div class="slide-item testi-slide-item">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">כאן תוכלי להוסיף את חוות הדעת הראשונה של הלקוחה שלך ✨</p>
+        <div class="testi-author">— שם לקוחה</div>
+      </div>
+      <div class="slide-item testi-slide-item">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">כאן תוכלי להוסיף את חוות הדעת השנייה — שיתפרסמו בגאווה! 🌸</p>
+        <div class="testi-author">— שם לקוחה</div>
+      </div>
+      <div class="slide-item testi-slide-item">
+        <div class="stars">★★★★★</div>
+        <p class="testi-quote">כאן תוכלי להוסיף את חוות הדעת השלישית — מלים מהלב 💕</p>
+        <div class="testi-author">— שם לקוחה</div>
+      </div>
+    </div>
+    <button class="slider-btn prev" onclick="slide('testi',-1)">&#8250;</button>
+    <button class="slider-btn next" onclick="slide('testi',1)">&#8249;</button>
+  </div>
+  <div class="slider-dots" id="testiDots">
+    <div class="dot active" onclick="goTo('testi',0)"></div>
+    <div class="dot" onclick="goTo('testi',1)"></div>
+    <div class="dot" onclick="goTo('testi',2)"></div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact">
+  <h2 class="section-title">צרי קשר</h2>
+  <div class="section-line"></div>
+  <div class="contact-inner">
+    <div class="form-group">
+      <label>שם מלא</label>
+      <input type="text" placeholder="מה שמך?">
+    </div>
+    <div class="form-group">
+      <label>טלפון</label>
+      <input type="tel" placeholder="מספר טלפון ליצירת קשר">
+    </div>
+    <div class="form-group">
+      <label>הודעה</label>
+      <textarea placeholder="במה אוכל לעזור לך?"></textarea>
+    </div>
+    <button class="btn-submit" onclick="sendWhatsApp()">שלחי הודעה ✦</button>
+    <p class="whatsapp-note">
+      או פשוט <a href="https://wa.me/972548033717" target="_blank">לחצי כאן לוואטסאפ ישיר</a> 💬
+    </p>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>✦ מלכה — בוטיק למגוון טיפולי יופי וטיפוח ✦</p>
+  <p style="margin-top:8px; font-size:0.85rem; opacity:0.75">טבעי. פשוט. שלמות.</p>
+</footer>
+
+<script>
+  // ─── SLIDERS ───
+  const sliders = {
+    work:  { current: 0, total: 3 },
+    testi: { current: 0, total: 3 },
+  };
+
+  function slide(id, dir) {
+    const s = sliders[id];
+    s.current = (s.current + dir + s.total) % s.total;
+    updateSlider(id);
+  }
+
+  function goTo(id, idx) {
+    sliders[id].current = idx;
+    updateSlider(id);
+  }
+
+  function updateSlider(id) {
+    const s = sliders[id];
+    const track = document.getElementById(id + 'Track');
+    track.style.transform = `translateX(${s.current * 100}%)`;
+    const dots = document.querySelectorAll(`#${id}Dots .dot`);
+    dots.forEach((d, i) => d.classList.toggle('active', i === s.current));
+  }
+
+  // Touch swipe
+  ['workSlider','testiSlider'].forEach(sid => {
+    const el = document.getElementById(sid);
+    const id = sid.replace('Slider','');
+    let startX = 0;
+    el.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    el.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) slide(id, diff > 0 ? 1 : -1);
+    });
+  });
+
+  // ─── INTERSECTION OBSERVER ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const idx = [...el.parentElement.children].indexOf(el);
+        el.style.animationDelay = (idx * 0.1) + 's';
+        el.classList.add('visible');
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.treatment-card, .why-card').forEach(el => observer.observe(el));
+
+  // ─── WHATSAPP SEND ───
+  function sendWhatsApp() {
+    const name = document.querySelector('input[type=text]').value;
+    const phone = document.querySelector('input[type=tel]').value;
+    const msg = document.querySelector('textarea').value;
+    const text = encodeURIComponent(`שלום! אני ${name || 'לקוחה'}.\n${msg || 'אשמח לשמוע פרטים נוספים.'}`);
+    window.open(`https://wa.me/972548033717?text=${text}`, '_blank');
+  }
+</script>
+</body>
+</html>
