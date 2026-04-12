@@ -8,6 +8,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Montserrat:wght@100;200;400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta property="og:title" content="MALKA BOUTIQUE | Luxury Aesthetics">
+    <meta property="og:description" content="טיפולי יופי פרימיום: הרמת ריסים, עיצוב גבות ושעוות בוטיק.">
+    <meta property="og:image" content="logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
 
     <style>
         /* --- Root Variables & Design System --- */
@@ -207,6 +211,8 @@
             position: relative;
             z-index: 1;
             color: var(--text-dark);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .luxury-button::before {
@@ -376,6 +382,29 @@
             .main-slider { width: 95%; height: 60vh; }
             .luxury-button { width: 100%; padding: 20px 30px; }
         }
+
+        .instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: transparent;
+    border: 1px solid #E1306C; /* צבע האינסטגרם */
+    color: #3a2d2d;
+    padding: 15px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    transition: var(--transition-fast);
+}
+
+.instagram-link:hover {
+    background: #E1306C;
+    color: white;
+    box-shadow: 0 10px 20px rgba(225, 48, 108, 0.2);
+    transform: translateY(-3px);
+}
     </style>
 </head>
 <body>
@@ -455,6 +484,12 @@
             <button class="luxury-button" data-aos="fade-up" onclick="toggleGallery('work-gallery')">לצפייה בעבודות שלי</button>
             <button class="luxury-button" data-aos="fade-up" data-aos-delay="100" onclick="toggleGallery('feedback-gallery')">לצפייה בחוות דעת</button>
             <button class="luxury-button" data-aos="fade-up" data-aos-delay="200" onclick="toggleGallery('item-gallery')">קולקציית המוצרים</button>
+    
+            <a href="https://www.instagram.com/the_malka_lashes" target="_blank" class="instagram-link" data-aos="fade-up" data-aos-delay="300">
+            <i class="fa-brands fa-instagram"></i>
+            עקבו אחרי באינסטגרם
+           </a>
+        </div>
         </div>
 
         <div style="margin-top: 60px;" data-aos="fade-up">
@@ -507,6 +542,10 @@
                 דברי איתי בוואטסאפ
             </a>
             <p style="margin-top: 20px; font-weight: 700;">054-803-3717</p>
+            <a href="https://www.instagram.com/the_malka_lashes" target="_blank" class="instagram-link">
+            <i class="fa-brands fa-instagram"></i>
+                עקבו אחרינו באינסטגרם
+            </a>
         </div>
 
         <div class="info-footer">
@@ -570,15 +609,16 @@
         }
 
         // Slider Navigation Logic
-        function scrollSlider(id, direction) {
-            const slider = document.getElementById(id);
-            const scrollAmount = slider.clientWidth;
-            slider.scrollBy({
-                left: -direction * scrollAmount, // Negative because of RTL direction
-                behavior: 'smooth'
-            });
-        }
-
+      function scrollSlider(id, direction) {
+    const slider = document.getElementById(id);
+    const scrollAmount = slider.clientWidth;
+    // ב-RTL, הזזה שמאלה היא חיובית או שלילית תלוי בדפדפן, 
+    // הדרך הבטוחה היא להשתמש ב-direction
+    slider.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
+}
         // Close gallery on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
