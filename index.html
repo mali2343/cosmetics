@@ -408,6 +408,30 @@
     box-shadow: 0 10px 20px rgba(225, 48, 108, 0.2);
     transform: translateY(-3px);
 }
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    transform: translateY(-50%);
+    pointer-events: none; /* מאפשר ללחוץ על התמונה מתחת */
+}
+
+.nav-arrow {
+    pointer-events: auto; /* מחזיר את הלחיצה לחצים */
+    background: rgba(255, 255, 255, 0.8);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: var(--shadow);
+}
+        
     </style>
 </head>
 <body>
@@ -497,17 +521,85 @@
         </div>
     </section>
 
-    <div id="work-gallery" class="gallery-overlay">
-        <span class="close-gallery" onclick="toggleGallery('work-gallery')">&times;</span>
-        <div class="slider-viewport">
-            <div class="main-slider" id="work-slider"></div>
-            <div class="slider-nav">
-                <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('work-slider', 1)"></i>
-                <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('work-slider', -1)"></i>
+<div id="work-gallery" class="gallery-overlay">
+    <span class="close-gallery" onclick="toggleGallery('work-gallery')">&times;</span>
+    <div class="slider-viewport">
+        <div class="main-slider" id="work-slider">
+            <div class="slider-item">
+                <video muted loop playsinline controls style="max-height: 70vh; border-radius: 15px;">
+                    <source src="video1.mp4" type="video/mp4">
+                </video>
             </div>
+            <div class="slider-item">
+                <video muted loop playsinline controls style="max-height: 70vh; border-radius: 15px;">
+                    <source src="video2.mp4" type="video/mp4">
+                </video>
+            </div>
+            </div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('work-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('work-slider', -1)"></i>
         </div>
     </div>
+</div>
 
+<div id="feedback-gallery" class="gallery-overlay">
+    <span class="close-gallery" onclick="toggleGallery('feedback-gallery')">&times;</span>
+    <div class="slider-viewport">
+        <div class="main-slider" id="feedback-slider"></div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('feedback-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('feedback-slider', -1)"></i>
+        </div>
+    </div>
+</div>
+
+<div id="item-gallery" class="gallery-overlay">
+    <span class="close-gallery" onclick="toggleGallery('item-gallery')">&times;</span>
+    <div class="slider-viewport">
+        <div class="main-slider" id="item-slider"></div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('item-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('item-slider', -1)"></i>
+        </div>
+    </div>
+</div>
+
+<div id="feedback-gallery" class="gallery-overlay">
+    <span class="close-gallery" onclick="toggleGallery('feedback-gallery')">&times;</span>
+    <div class="slider-viewport">
+        <div class="main-slider" id="feedback-slider"></div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('feedback-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('feedback-slider', -1)"></i>
+        </div>
+    </div>
+</div>
+
+<div id="item-gallery" class="gallery-overlay">
+    <span class="close-gallery" onclick="toggleGallery('item-gallery')">&times;</span>
+    <div class="slider-viewport">
+        <div class="main-slider" id="item-slider"></div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('item-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('item-slider', -1)"></i>
+        </div>
+    </div>
+</div>
+
+            <div class="slider-item">
+                <video muted loop playsinline controls style="max-height: 70vh; border-radius: 15px; box-shadow: 0 30px 60px rgba(0,0,0,0.1);">
+                    <source src="video2.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            </div>
+        <div class="slider-nav">
+            <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('work-slider', 1)"></i>
+            <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('work-slider', -1)"></i>
+        </div>
+    </div>
+</div>
     <div id="feedback-gallery" class="gallery-overlay">
         <span class="close-gallery" onclick="toggleGallery('feedback-gallery')">&times;</span>
         <div class="slider-viewport">
@@ -607,13 +699,12 @@
         }
 
         // Slider Navigation Logic
-      function scrollSlider(id, direction) {
+     function scrollSlider(id, direction) {
     const slider = document.getElementById(id);
     const scrollAmount = slider.clientWidth;
-    // ב-RTL, הזזה שמאלה היא חיובית או שלילית תלוי בדפדפן, 
-    // הדרך הבטוחה היא להשתמש ב-direction
+    // בגלל RTL, אנחנו נכפיל ב-1- כדי שהכיוון יהיה אינטואיטיבי
     slider.scrollBy({
-        left: direction * scrollAmount,
+        left: direction * scrollAmount * -1, 
         behavior: 'smooth'
     });
 }
