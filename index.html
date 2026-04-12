@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malka Boutique | מלכה - בוטיק יופי</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;800&family=Cinzel:wght@400;700&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --primary-pink: #fce4ec;
+            --dark-pink: #f8bbd0;
+            --gold-accent: #d4af37;
+            --text-color: #5d4037;
+            --glass: rgba(255, 255, 255, 0.45);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: linear-gradient(135deg, #fff5f5 0%, #fce4ec 100%);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--primary-pink); }
+        ::-webkit-scrollbar-thumb { background: var(--dark-pink); border-radius: 10px; }
+
+        /* --- Header & Hero --- */
+        header {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .logo-container {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 50%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.6);
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--text-color);
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 200;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        /* --- Sections General --- */
+        section {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+        }
+
+        /* --- Treatment Cards (Professional Grid) --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(5px);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: white;
+            box-shadow: 0 30px 60px rgba(238, 188, 188, 0.3);
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+            color: #4e342e;
+        }
+
+        /* --- Why Choose Us (Pop-up Effect) --- */
+        .why-us-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .chip {
+            background: white;
+            padding: 15px 35px;
+            border-radius: 100px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--primary-pink);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .chip:hover {
+            background: var(--text-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* --- Modern Sliders --- */
+        .slider-box {
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 20px;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: grab;
+        }
+
+        .img-card {
+            min-width: 320px;
+            height: 450px;
+            border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.6));
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .img-card:hover .img-overlay { opacity: 1; }
+
+        /* --- Navigation Arrows --- */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 10;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .prev { right: 10px; }
+        .next { left: 10px; }
+
+        /* --- Contact Footer --- */
+        .footer-cta {
+            background: white;
+            border-radius: 50px 50px 0 0;
+            padding: 80px 20px;
+            text-align: center;
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.02);
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25d366;
+            color: white;
+            padding: 20px 50px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: var(--transition);
+            margin-top: 30px;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            header { min-height: 60vh; }
+            .img-card { min-width: 85vw; height: 380px; }
+            section { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container" data-aos="zoom-in">
+            <img src="logo.png" alt="Malka Logo" class="logo">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="300">
+            <h1 class="hero-title">מלכה-בוטיק</h1>
+            <p class="hero-subtitle">טבעי • פשוט • שלמות</p>
+        </div>
+    </header>
+
+    <section id="treatments">
+        <div class="section-header" data-aos="fade-up">
+            <h2>הטיפולים שלנו</h2>
+        </div>
+        <div class="grid-container">
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>הרמת ריסים</h3>
+                <p>ריסים טבעיים בלבד לקבלת מראה פתוח, מודגש וטבעי שילווה אותך כל היום.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>הרמת גבות</h3>
+                <p>למראה מלא, שופע ומסודר. סימטריה מושלמת שמדגישה את העיניים שלך.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="300">
+                <h3>עיצוב גבות</h3>
+                <p>אמנות הדיוק. עיצוב בהתאמה אישית למבנה הפנים הייחודי שלך.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="400">
+                <h3>שיקום גבות</h3>
+                <p>תהליך של סבלנות והתמדה למימוש הפוטנציאל הטבעי של הגבה שלך.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="500">
+                <h3>צביעה מקצועית</h3>
+                <p>צביעת ריסים וגבות המעניקה עומק ומראה מודגש לאורך זמן.</p>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="600">
+                <h3>שעווה עדינה</h3>
+                <p>טיפול פנים וגוף מקצועי לתוצאות חלקות ונעימות במקסימום עדינות.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: rgba(255,255,255,0.3);">
+        <div class="section-header" data-aos="fade-up">
+            <h2>למה לבחור במלכה?</h2>
+        </div>
+        <div class="why-us-chips">
+            <div class="chip" data-aos="zoom-in-up">יחס אישי</div>
+            <div class="chip" data-aos="zoom-in-up" data-aos-delay="100">תיאום ציפיות מלא</div>
+            <div class="chip" data-aos="zoom-in-up" data-aos-delay="200">מקצועיות ללא פשרות</div>
+            <div class="chip" data-aos="zoom-in-up" data-aos-delay="300">חומרים מהשורה הראשונה</div>
+            <div class="chip" data-aos="zoom-in-up" data-aos-delay="400">דיוק מקסימלי</div>
+            <div class="chip" data-aos="zoom-in-up" data-aos-delay="500">אווירה רגועה</div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card" style="text-align: center; background: linear-gradient(45deg, #ffffff, #fdf2f2);" data-aos="flip-left">
+            <h3 style="font-family: 'Cinzel';">החנות שלנו</h3>
+            <p style="font-size: 1.2rem;">ניתן למצוא בקליניקה מוצרי טיפוח ושיקום מתקדמים,<br> ומגוון תכשיטי כסף וגולדפילד בעבודת יד מרהיבה.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>גלריית עבודות</h2>
+        </div>
+        <div class="slider-box">
+            <button class="nav-arrow prev" onclick="moveSlider('work-track', 1)">&#10095;</button>
+            <div class="slider-track" id="work-track">
+                </div>
+            <button class="nav-arrow next" onclick="moveSlider('work-track', -1)">&#10094;</button>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>הלקוחות מספרות</h2>
+        </div>
+        <div class="slider-box">
+            <button class="nav-arrow prev" onclick="moveSlider('feedback-track', 1)">&#10095;</button>
+            <div class="slider-track" id="feedback-track">
+                </div>
+            <button class="nav-arrow next" onclick="moveSlider('feedback-track', -1)">&#10094;</button>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>הקולקציה שלנו</h2>
+        </div>
+        <div class="slider-box">
+            <button class="nav-arrow prev" onclick="moveSlider('item-track', 1)">&#10095;</button>
+            <div class="slider-track" id="item-track">
+                </div>
+            <button class="nav-arrow next" onclick="moveSlider('item-track', -1)">&#10094;</button>
+        </div>
+    </section>
+
+    <footer class="footer-cta">
+        <h2 class="hero-title" data-aos="fade-up">מוכנה להתפנק?</h2>
+        <p data-aos="fade-up" data-aos-delay="200">אני כאן לכל שאלה ולקביעת תור בהתאמה אישית</p>
+        <a href="https://wa.me/972548033717" class="whatsapp-btn" data-aos="zoom-in">
+            <span>לחצי כאן להזמנה ב-WhatsApp</span>
+        </a>
+        <div style="margin-top: 40px; opacity: 0.6;">
+            <p>כתובת הקליניקה זמינה בתיאום מראש</p>
+            <p>054-803-3717</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: false });
+
+        // Function to create gallery items
+        function initGallery(trackId, prefix, count, isFeedback = false) {
+            const track = document.getElementById(trackId);
+            for (let i = 1; i <= count; i++) {
+                const div = document.createElement('div');
+                div.className = 'img-card';
+                // Using placeholders if images missing
+                const imgSrc = isFeedback ? `${i}.jpg` : `${prefix}${i}.jpg`;
+                div.style.backgroundImage = `url('${imgSrc}'), url('https://via.placeholder.com/400x600/fce4ec/5d4037?text=Malka+Boutique')`;
+                
+                div.innerHTML = `<div class="img-overlay"><span>Perfect Detail #${i}</span></div>`;
+                track.appendChild(div);
+            }
+        }
+
+        initGallery('work-track', 'image', 18);
+        initGallery('feedback-track', '', 23, true);
+        initGallery('item-track', 'item', 4);
+
+        // Advanced Slider Logic
+        let offsets = {};
+        function moveSlider(id, direction) {
+            if (!offsets[id]) offsets[id] = 0;
+            const track = document.getElementById(id);
+            const cardWidth = track.querySelector('.img-card').offsetWidth + 20;
+            const visibleWidth = track.parentElement.offsetWidth;
+            const maxScroll = track.scrollWidth - visibleWidth;
+
+            offsets[id] += direction * cardWidth;
+
+            if (offsets[id] > 0) offsets[id] = 0;
+            if (Math.abs(offsets[id]) > maxScroll) offsets[id] = -maxScroll;
+
+            track.style.transform = `translateX(${offsets[id]}px)`;
+        }
+
+        // Swipe Support
+        let startX = 0;
+        document.querySelectorAll('.slider-box').forEach(box => {
+            const track = box.querySelector('.slider-track');
+            box.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+            box.addEventListener('touchend', e => {
+                const endX = e.changedTouches[0].clientX;
+                if (startX - endX > 50) moveSlider(track.id, -1);
+                if (startX - endX < -50) moveSlider(track.id, 1);
+            });
+        });
+    </script>
+</body>
+</html>
