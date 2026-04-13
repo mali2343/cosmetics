@@ -89,6 +89,7 @@
         }
 
         /* --- Header Section --- */
+/* --- Header Section --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -103,25 +104,20 @@
         .logo-box {
             position: relative;
             margin-bottom: 40px;
+            /* הסרנו את ה-::after שהיה כאן בעבר */
         }
-
-        .logo-box::after {
-            content: '';
-            position: absolute;
-            top: -20px; left: -20px; right: -20px; bottom: -20px;
-            border: 1px solid var(--rose-gold);
-            border-radius: 50%;
-            animation: rotate 15s linear infinite;
-        }
-
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         .logo {
             width: 220px;
-            height: auto;
+            height: 220px; /* גובה ורוחב שווים לעיגול מושלם */
+            object-fit: cover; /* מבטיח שהתמונה לא תימתח */
+            border-radius: 50%; /* הופך את התמונה לעיגול */
+            border: 2px solid var(--rose-gold); /* מסגרת דקה ויוקרתית */
+            padding: 5px; /* רווח בין התמונה למסגרת */
             position: relative;
             z-index: 2;
             filter: drop-shadow(var(--shadow));
+            background: white; /* רקע לבן במידה והלוגו שקוף */
         }
 
         .hero-title {
