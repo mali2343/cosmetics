@@ -107,14 +107,13 @@
             margin-bottom: 40px;
             z-index: 11;
         }
-
         .logo {
             width: clamp(130px, 18vw, 170px);
             height: auto;
             border-radius: 50%;
-            border: 6px solid var(--gold-light);
-            box-shadow: 0 0 40px rgba(197, 160, 89, 0.4);
-            background: white;
+            border: none; /* הסרת עיגול הזהב */
+            box-shadow: none; /* הסרת הצללית הזהובה */
+            background: transparent; /* אם התמונה שקופה, זה ייראה נקי יותר */
             transition: var(--transition-bounce);
         }
 
