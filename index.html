@@ -120,15 +120,19 @@
         .logo:hover {
             transform: rotate(5deg) scale(1.05);
         }
-
+        
         .hero-title {
             font-family: 'Heebo', sans-serif;
             font-size: clamp(3.8rem, 14vw, 8rem);
             font-weight: 900;
             letter-spacing: -2px;
-            background: linear-gradient(to bottom, #2d2424 20%, #b18d4b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    
+    /* הצבע החדש - זהב אחיד */
+            color: var(--gold-text); 
+    
+    /* ביטול הגדרות ה-Gradient הקודמות */
+            background: none;
+            -webkit-text-fill-color: initial;
             line-height: 0.9;
             margin-bottom: 15px;
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
