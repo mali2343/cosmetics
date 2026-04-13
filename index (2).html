@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MALKA BOUTIQUE | הבית שלך ליופי ואסתטיקה</title>
+    <meta name="description" content="Malka Boutique - יופי, פינוק, מקצועיות ואיכות נפגשים במקום אחד.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Heebo:wght@100;300;400;500;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --luxury-pink: #fdf2f2;
+            --deep-rose: #e6a4a4;
+            --rose-dust: #d6a4a4;
+            --cream: #fffcfc;
+            --gold-light: #f1e5d1;
+            --gold-dark: #b89150;
+            --gold-text: #c5a059;
+            --text-dark: #2d2d2d;
+            --white: #ffffff;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-bold: 0 20px 40px rgba(214,164,164,0.2);
+            --transition-smooth: all 0.5s cubic-bezier(0.165,0.84,0.44,1);
+            --transition-bounce: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+        html { scroll-behavior:smooth; font-size:16px; overflow-x:hidden; }
+        body {
+            font-family:'Assistant',sans-serif;
+            background-color:var(--luxury-pink);
+            color:var(--text-dark);
+            line-height:1.8;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+        }
+
+        /* ---- ANIMATED STARS ---- */
+        #star-field { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; overflow:hidden; }
+
+        .star {
+            position:absolute;
+            background:var(--gold-dark);
+            border-radius:50%;
+            animation:
+                twinkle var(--twinkle-dur) infinite ease-in-out,
+                floatStar var(--float-dur) infinite linear;
+        }
+
+        @keyframes twinkle {
+            0%,100% { opacity:0.1; transform:scale(1) translate(0,0); }
+            50%      { opacity:0.7; transform:scale(1.4) translate(var(--tx), var(--ty)); }
+        }
+
+        @keyframes floatStar {
+            0%   { transform:translate(0, 0); }
+            25%  { transform:translate(var(--fx1), var(--fy1)); }
+            50%  { transform:translate(var(--fx2), var(--fy2)); }
+            75%  { transform:translate(var(--fx3), var(--fy3)); }
+            100% { transform:translate(0, 0); }
+        }
+
+        /* HEADER */
+        header {
+            height:100vh;
+            display:flex; flex-direction:column; justify-content:center; align-items:center;
+            text-align:center; padding:20px;
+            position:relative; z-index:10;
+        }
+        .logo-wrap { margin-bottom:30px; }
+        .logo-img {
+            width:clamp(130px,22vw,200px);
+            border-radius:50%;
+            box-shadow:var(--shadow-bold);
+            border:5px solid white;
+            transition:var(--transition-bounce);
+        }
+        .logo-img:hover { transform:scale(1.08) rotate(3deg); }
+        .hero-h1 {
+            font-family:'Heebo',sans-serif;
+            font-size:clamp(3rem,14vw,9.5rem);
+            font-weight:900;
+            color:var(--rose-dust);
+            line-height:0.85;
+            margin-bottom:20px;
+        }
+        .main-slogan {
+            font-family:'Heebo',sans-serif;
+            font-size:clamp(1rem,4vw,1.9rem);
+            font-weight:600;
+            letter-spacing:4px;
+            background:linear-gradient(135deg,var(--gold-text),var(--rose-dust),var(--gold-text));
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        .sub-tagline { margin-top:15px; font-size:clamp(1rem,3vw,1.3rem); font-weight:700; color:var(--text-dark); letter-spacing:1px; }
+
+        /* SECTIONS */
+        .section-container { padding:80px 20px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
+        .section-header { text-align:center; margin-bottom:60px; }
+        .section-header h2 { font-family:'Heebo'; font-size:clamp(2rem,8vw,5.5rem); font-weight:900; margin-bottom:10px; }
+        .section-header p { font-size:clamp(1rem,3vw,1.4rem); color:var(--gold-text); font-weight:600; }
+
+        /* TREATMENT CARDS */
+        .treatment-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:24px;
+        }
+        .treatment-card {
+            background:linear-gradient(145deg,#fff 60%,#fdeef0 100%);
+            padding:40px 28px;
+            border-radius:36px;
+            box-shadow:var(--shadow-soft);
+            transition:var(--transition-smooth);
+            text-align:center;
+            border-bottom:5px solid transparent;
+            position:relative;
+            overflow:hidden;
+        }
+        .treatment-card::before {
+            content:'';
+            position:absolute;
+            top:-60%; left:-60%;
+            width:120%; height:120%;
+            background:radial-gradient(circle,rgba(214,164,164,0.15) 0%,transparent 70%);
+            opacity:0; transition:opacity 0.5s;
+        }
+        .treatment-card:hover::before { opacity:1; }
+        .treatment-card:hover {
+            transform:translateY(-14px) scale(1.02);
+            box-shadow:var(--shadow-bold);
+            border-bottom-color:var(--gold-dark);
+        }
+        .treatment-card i { font-size:3rem; color:var(--gold-text); margin-bottom:20px; display:block; transition:transform 0.4s; }
+        .treatment-card:hover i { transform:scale(1.2) rotate(-8deg); }
+        .treatment-card h3 { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:800; margin-bottom:12px; color:var(--rose-dust); }
+        .treatment-card p { font-size:clamp(0.95rem,2.5vw,1.15rem); color:#777; }
+
+        /* WHY ME */
+        .why-me-container {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+            gap:16px;
+            margin-top:50px;
+        }
+        .why-card {
+            background:rgba(255,255,255,0.7);
+            padding:26px 16px;
+            border-radius:22px;
+            font-weight:700;
+            font-size:clamp(1rem,2.5vw,1.15rem);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            box-shadow:var(--shadow-soft);
+            transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.5);
+            border:2px solid transparent;
+            cursor:default;
+            text-align:center;
+        }
+        .why-card i { color:#25d366; font-size:1.3rem; transition:transform 0.4s; flex-shrink:0; }
+        .why-card:hover {
+            background:white;
+            transform:scale(1.08) translateY(-6px);
+            border-color:var(--rose-dust);
+            color:var(--gold-dark);
+            box-shadow:0 20px 40px rgba(214,164,164,0.25);
+        }
+        .why-card:hover i { transform:scale(1.3) rotate(15deg); color:var(--gold-text); }
+
+        /* PORTFOLIO */
+        .gallery-trigger-area { margin:60px 0; text-align:center; }
+        .section-title { font-family:'Heebo'; font-size:clamp(2rem,7vw,4.5rem); font-weight:900; margin-bottom:36px; }
+        .btn-gallery {
+            background:var(--text-dark);
+            color:white;
+            padding:20px 44px;
+            border-radius:60px;
+            font-size:clamp(1.1rem,3vw,1.4rem);
+            font-weight:900;
+            border:none;
+            cursor:pointer;
+            transition:var(--transition-bounce);
+            box-shadow:var(--shadow-bold);
+        }
+        .btn-gallery:hover { background:var(--gold-dark); transform:scale(1.05); }
+
+        /* LIGHTBOX */
+        #lightbox-overlay {
+            display:none;
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,0.92);
+            z-index:9999;
+            align-items:center;
+            justify-content:center;
+            flex-direction:column;
+        }
+        #lightbox-overlay.open { display:flex; }
+        #lightbox-overlay img {
+            max-width:92vw;
+            max-height:80vh;
+            border-radius:16px;
+            object-fit:contain;
+            box-shadow:0 30px 80px rgba(0,0,0,0.6);
+            user-select:none;
+            touch-action:pan-y;
+        }
+        .lb-close {
+            position:absolute;
+            top:16px; left:16px;
+            color:white; font-size:2rem;
+            cursor:pointer;
+            background:rgba(255,255,255,0.15);
+            border:none; border-radius:50%;
+            width:50px; height:50px;
+            display:flex; align-items:center; justify-content:center;
+            transition:background 0.3s;
+            z-index:10001;
+        }
+        .lb-close:hover { background:rgba(255,255,255,0.35); }
+        .lb-arrow {
+            position:absolute;
+            top:50%; transform:translateY(-50%);
+            color:white; font-size:2rem;
+            cursor:pointer;
+            background:rgba(255,255,255,0.12);
+            border:none; border-radius:50%;
+            width:54px; height:54px;
+            display:flex; align-items:center; justify-content:center;
+            transition:background 0.3s;
+            z-index:10000;
+        }
+        .lb-arrow:hover { background:rgba(255,255,255,0.3); }
+        .lb-prev { right:12px; }
+        .lb-next { left:12px; }
+        .lb-counter {
+            position:absolute; bottom:22px;
+            color:rgba(255,255,255,0.7);
+            font-size:1rem; font-family:'Assistant';
+        }
+
+        /* PORTFOLIO THUMBS */
+        .portfolio-thumbs { display:none; }
+        .portfolio-thumbs.active {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+            gap:12px;
+            padding:28px 0;
+            animation:fadeInUp 0.6s ease;
+        }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+        .portfolio-thumb {
+            border-radius:14px;
+            overflow:hidden;
+            cursor:pointer;
+            aspect-ratio:1;
+            background:#eee;
+            box-shadow:var(--shadow-soft);
+            transition:transform 0.35s,box-shadow 0.35s;
+            position:relative;
+        }
+        .portfolio-thumb img { width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s; }
+        .portfolio-thumb:hover { transform:scale(1.05); box-shadow:var(--shadow-bold); }
+        .portfolio-thumb:hover img { transform:scale(1.08); }
+        .portfolio-thumb .thumb-overlay {
+            position:absolute;inset:0;
+            background:rgba(197,160,89,0);
+            display:flex;align-items:center;justify-content:center;
+            color:white;font-size:1.8rem;opacity:0;
+            transition:all 0.3s;
+        }
+        .portfolio-thumb:hover .thumb-overlay { background:rgba(197,160,89,0.3);opacity:1; }
+
+        /* INSTAGRAM */
+        .instagram-section { margin:50px 0; }
+        .instagram-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:28px;
+            justify-items:center;
+        }
+        .instagram-embed-wrap {
+            width:100%;
+            max-width:480px;
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:var(--shadow-bold);
+        }
+
+        /* PRODUCTS BANNER — simplified */
+        .products-title-section {
+            text-align:center;
+            padding:70px 20px 20px;
+            position:relative;
+            z-index:10;
+            max-width:1400px;
+            margin:0 auto;
+        }
+        .products-title-section h2 {
+            font-family:'Heebo';
+            font-size:clamp(2.2rem,8vw,5rem);
+            font-weight:900;
+            color:var(--rose-dust);
+            margin-bottom:12px;
+        }
+        .products-title-section p {
+            font-size:clamp(1rem,3vw,1.3rem);
+            color:var(--gold-text);
+            font-weight:600;
+            letter-spacing:2px;
+        }
+
+        /* ITEMS GALLERY */
+        .items-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+            gap:18px;
+            margin-top:36px;
+            max-width:1400px;
+            margin-left:auto;
+            margin-right:auto;
+            padding:0 20px;
+        }
+        .item-card {
+            border-radius:20px;
+            overflow:hidden;
+            background:white;
+            padding:8px;
+            box-shadow:var(--shadow-soft);
+            transition:var(--transition-smooth);
+            cursor:pointer;
+        }
+        .item-card img { width:100%;border-radius:12px;display:block;aspect-ratio:1;object-fit:cover;transition:transform 0.4s; }
+        .item-card:hover { transform:translateY(-8px);box-shadow:var(--shadow-bold); }
+        .item-card:hover img { transform:scale(1.05); }
+
+        /* REVIEWS */
+        .reviews-section { padding:60px 20px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
+        .reviews-scroll {
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+            gap:14px;
+            margin-top:36px;
+        }
+        .review-thumb {
+            border-radius:14px;
+            overflow:hidden;
+            cursor:pointer;
+            box-shadow:var(--shadow-soft);
+            transition:var(--transition-smooth);
+            background:#fff;
+            padding:5px;
+        }
+        .review-thumb img { width:100%;border-radius:10px;display:block;aspect-ratio:3/4;object-fit:cover; }
+        .review-thumb:hover { transform:scale(1.04) translateY(-4px);box-shadow:var(--shadow-bold); }
+
+        /* FORM */
+        .form-section {
+            background:white;
+            padding:60px 40px;
+            border-radius:50px;
+            max-width:850px;
+            margin:0 auto;
+            box-shadow:var(--shadow-bold);
+        }
+        .luxury-input {
+            width:100%;
+            padding:20px;
+            border-radius:22px;
+            border:1px solid #eee;
+            background:var(--cream);
+            margin-bottom:22px;
+            font-family:'Assistant';
+            font-size:1.1rem;
+            transition:0.3s;
+            display:block;
+        }
+        .luxury-input:focus { border-color:var(--rose-dust);outline:none;background:white; }
+        .btn-whatsapp {
+            width:100%;
+            padding:24px;
+            background:var(--text-dark);
+            color:white;
+            border-radius:32px;
+            border:none;
+            font-size:clamp(1.2rem,4vw,1.7rem);
+            font-weight:900;
+            cursor:pointer;
+            transition:var(--transition-bounce);
+        }
+        .btn-whatsapp:hover { background:#25d366;transform:scale(1.02); }
+
+        /* FOOTER */
+        footer {
+            text-align:center;
+            padding:100px 20px 50px;
+            background:white;
+            border-top:1px solid var(--luxury-pink);
+            position:relative;
+            z-index:100;
+        }
+        .footer-logo { width:120px;border-radius:50%;margin-bottom:26px; }
+        .footer-title { font-family:'Heebo';font-weight:900;font-size:clamp(1.8rem,6vw,2.8rem);color:var(--gold-text);letter-spacing:3px; }
+        .footer-phone {
+            font-size:clamp(1.6rem,6vw,3rem);
+            font-weight:900;color:var(--text-dark);
+            text-decoration:none;display:block;margin:36px 0;
+        }
+        .social-flex-row {
+            display:flex !important; flex-direction:row !important;
+            justify-content:center !important; gap:22px !important; margin:44px 0 !important;
+        }
+        .social-btn-circle {
+            width:70px; height:70px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            color:white; font-size:30px; text-decoration:none;
+            transition:var(--transition-bounce);
+            box-shadow:0 10px 20px rgba(0,0,0,0.1);
+        }
+        .social-btn-circle.wa { background:#25d366; }
+        .social-btn-circle.ig { background:linear-gradient(45deg,#f09433,#bc1888); }
+        .social-btn-circle:hover { transform:scale(1.15) rotate(10deg); }
+        .meir-signature { border-top:1px solid #f2f2f2;padding-top:36px;margin-top:60px;font-size:1rem;color:#ccc; }
+        .meir-link { color:var(--gold-text);font-weight:800;text-decoration:none; }
+
+        /* ============ MOBILE ============ */
+        @media(max-width:768px){
+            .section-container { padding:55px 14px; }
+            .form-section { padding:36px 18px; border-radius:32px; }
+            .treatment-grid { grid-template-columns:1fr; gap:16px; }
+            .why-me-container { grid-template-columns:1fr 1fr; gap:12px; }
+            .reviews-scroll { grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+            .portfolio-thumbs.active { grid-template-columns:repeat(3,1fr); gap:8px; }
+            .instagram-grid { grid-template-columns:1fr; }
+            .items-grid { grid-template-columns:repeat(2,1fr); gap:12px; padding:0 14px; }
+            .lb-prev { right:6px; }
+            .lb-next { left:6px; }
+            .lb-arrow { width:44px; height:44px; font-size:1.5rem; }
+        }
+        @media(max-width:400px){
+            .why-me-container { grid-template-columns:1fr; }
+            .portfolio-thumbs.active { grid-template-columns:repeat(2,1fr); }
+            .reviews-scroll { grid-template-columns:repeat(2,1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="star-field"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox-overlay">
+    <button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <button class="lb-prev lb-arrow" onclick="lbNav(-1)"><i class="fas fa-chevron-right"></i></button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-next lb-arrow" onclick="lbNav(1)"><i class="fas fa-chevron-left"></i></button>
+    <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<div class="main-wrapper">
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-wrap" data-aos="zoom-in" data-aos-duration="1500">
+            <img src="logo.png" alt="Malka Logo" class="logo-img">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="400">
+            <h1 class="hero-h1">מלכה • בוטיק</h1>
+            <p class="main-slogan">טבעיות. פשטות. שלמות.</p>
+            <p class="sub-tagline">שיופי, פינוק, מקצועיות, תשוקה ואיכות נפגשים!</p>
+        </div>
+    </header>
+
+    <!-- TREATMENTS -->
+    <section class="section-container">
+        <div class="section-header" data-aos="fade-up">
+            <h2>מגוון הטיפולים</h2>
+            <p>טבעיות. פשטות. שלמות.</p>
+        </div>
+        <div class="treatment-grid">
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-eye"></i>
+                <h3>הרמת ריסים</h3>
+                <p>ריסים טבעיים בלבד לקבלת מראה פתוח מודגש וטבעי לאורך זמן.</p>
+            </div>
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-magic"></i>
+                <h3>הרמת גבות</h3>
+                <p>למראה מלא, שופע, מסודר וסימטרי המדגיש את מסגרת העיניים.</p>
+            </div>
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="300">
+                <i class="fas fa-pen-nib"></i>
+                <h3>עיצוב גבות</h3>
+                <p>עיצוב בהתאמה נכונה שמתאימה ומחמיאה באופן אישי למבנה הפנים.</p>
+            </div>
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-heart"></i>
+                <h3>שיקום גבות טבעיות</h3>
+                <p>תהליך משותף של דיוק, סבלנות והתמדה למימוש פוטנציאל מלא לגבות.</p>
+            </div>
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="500">
+                <i class="fas fa-palette"></i>
+                <h3>צביעת ריסים וגבות</h3>
+                <p>צביעה מקצועית שמעניקה מראה מודגש ועמוק לאורך זמן.</p>
+            </div>
+            <div class="treatment-card" data-aos="fade-up" data-aos-delay="600">
+                <i class="fas fa-star"></i>
+                <h3>שעוות פנים וגוף</h3>
+                <p>טיפול עדין ומקצועי לתוצאות חלקות ונעימות ללא גירויים.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY ME -->
+    <section class="section-container" style="background:rgba(255,255,255,0.4);border-radius:70px;">
+        <div class="section-header" data-aos="fade-up">
+            <h2>למה לבחור דווקא בי?</h2>
+            <p>הערכים שמובילים אותי בכל טיפול</p>
+        </div>
+        <div class="why-me-container">
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="100"><i class="fas fa-check-circle"></i> יחס אישי</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="150"><i class="fas fa-check-circle"></i> תיאום ציפיות</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="200"><i class="fas fa-check-circle"></i> מקצועיות</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="250"><i class="fas fa-check-circle"></i> חומרים איכותיים</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="300"><i class="fas fa-check-circle"></i> דיוק מקסימלי</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="350"><i class="fas fa-check-circle"></i> מגוון טיפולים</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="400"><i class="fas fa-check-circle"></i> אווירה נעימה</div>
+            <div class="why-card" data-aos="zoom-in" data-aos-delay="450"><i class="fas fa-check-circle"></i> זמינות אלייך</div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="section-container">
+        <div class="gallery-trigger-area" data-aos="fade-up">
+            <h2 class="section-title">תיק עבודות</h2>
+            <button class="btn-gallery" id="portfolio-btn" onclick="togglePortfolio()">
+                <i class="fas fa-images"></i> לצפייה בגלריה המלאה
+            </button>
+        </div>
+
+        <div class="portfolio-thumbs" id="portfolio-thumbs"></div>
+
+        <!-- Instagram Reels -->
+        <div class="instagram-section" data-aos="fade-up">
+            <div class="instagram-grid">
+                <div class="instagram-embed-wrap">
+                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQZHw9GCHQq/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;width:calc(100% - 2px);">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/reel/DQZHw9GCHQq/?utm_source=ig_embed&utm_campaign=loading" style="background:#FFFFFF;line-height:0;padding:0 0;text-align:center;text-decoration:none;width:100%;" target="_blank">
+                                <div style="display:flex;flex-direction:row;align-items:center;">
+                                    <div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px;"></div>
+                                    <div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center;">
+                                        <div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px;"></div>
+                                        <div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px;"></div>
+                                    </div>
+                                </div>
+                                <div style="padding:19% 0;"></div>
+                                <div style="display:block;height:50px;margin:0 auto 12px;width:50px;">
+                                    <svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511,-20)" fill="#000"><path d="M556.869,30.41C554.814,30.41 553.148,32.076 553.148,34.131C553.148,36.186 554.814,37.852 556.869,37.852C558.924,37.852 560.59,36.186 560.59,34.131C560.59,32.076 558.924,30.41 556.869,30.41M541,60.657C535.114,60.657 530.342,55.887 530.342,50C530.342,44.114 535.114,39.342 541,39.342C546.887,39.342 551.658,44.114 551.658,50C551.658,55.887 546.887,60.657 541,60.657M541,33.886C532.1,33.886 524.886,41.1 524.886,50C524.886,58.899 532.1,66.113 541,66.113C549.9,66.113 557.115,58.899 557.115,50C557.115,41.1 549.9,33.886 541,33.886M565.378,62.101C565.244,65.022 564.756,66.606 564.346,67.663C563.803,69.06 563.154,70.057 562.106,71.106C561.058,72.155 560.06,72.803 558.662,73.347C557.607,73.757 556.021,74.244 553.102,74.378C549.944,74.521 548.997,74.552 541,74.552C533.003,74.552 532.056,74.521 528.898,74.378C525.979,74.244 524.393,73.757 523.338,73.347C521.94,72.803 520.942,72.155 519.894,71.106C518.846,70.057 518.197,69.06 517.654,67.663C517.244,66.606 516.755,65.022 516.623,62.101C516.479,58.943 516.448,57.996 516.448,50C516.448,42.003 516.479,41.056 516.623,37.899C516.755,34.978 517.244,33.391 517.654,32.338C518.197,30.938 518.846,29.942 519.894,28.894C520.942,27.846 521.94,27.196 523.338,26.654C524.393,26.244 525.979,25.756 528.898,25.623C532.057,25.479 533.004,25.448 541,25.448C548.997,25.448 549.943,25.479 553.102,25.623C556.021,25.756 557.607,26.244 558.662,26.654C560.06,27.196 561.058,27.846 562.106,28.894C563.154,29.942 563.803,30.938 564.346,32.338C564.756,33.391 565.244,34.978 565.378,37.899C565.522,41.056 565.552,42.003 565.552,50C565.552,57.996 565.522,58.943 565.378,62.101M570.82,37.631C570.674,34.438 570.167,32.258 569.425,30.349C568.659,28.377 567.633,26.702 565.965,25.035C564.297,23.368 562.623,22.342 560.652,21.575C558.743,20.834 556.562,20.326 553.369,20.18C550.169,20.033 549.148,20 541,20C532.853,20 531.831,20.033 528.631,20.18C525.438,20.326 523.257,20.834 521.349,21.575C519.376,22.342 517.703,23.368 516.035,25.035C514.368,26.702 513.342,28.377 512.574,30.349C511.834,32.258 511.326,34.438 511.181,37.631C511.035,40.831 511,41.851 511,50C511,58.147 511.035,59.17 511.181,62.369C511.326,65.562 511.834,67.743 512.574,69.651C513.342,71.625 514.368,73.296 516.035,74.965C517.703,76.634 519.376,77.658 521.349,78.425C523.257,79.167 525.438,79.673 528.631,79.82C531.831,79.965 532.853,80.001 541,80.001C549.148,80.001 550.169,79.965 553.369,79.82C556.562,79.673 558.743,79.167 560.652,78.425C562.623,77.658 564.297,76.634 565.965,74.965C567.633,73.296 568.659,71.625 569.425,69.651C570.167,67.743 570.674,65.562 570.82,62.369C570.966,59.17 571,58.147 571,50C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg>
+                                </div>
+                                <div style="padding-top:8px;"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px;">הצגת פוסט זה באינסטגרם</div></div>
+                                <div style="padding:12.5% 0;"></div>
+                            </a>
+                            <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;text-align:center;"><a href="https://www.instagram.com/reel/DQZHw9GCHQq/?utm_source=ig_embed&utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;text-decoration:none;" target="_blank">פוסט משותף על ידי malka lashes (@the_malka_lashes)</a></p>
+                        </div>
+                    </blockquote>
+                </div>
+                <div class="instagram-embed-wrap">
+                    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C5OH_joo8M1/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15);margin:1px;max-width:540px;min-width:326px;padding:0;width:99.375%;width:calc(100% - 2px);">
+                        <div style="padding:16px;">
+                            <a href="https://www.instagram.com/reel/C5OH_joo8M1/?utm_source=ig_embed&utm_campaign=loading" style="background:#FFFFFF;line-height:0;padding:0 0;text-align:center;text-decoration:none;width:100%;" target="_blank">
+                                <div style="display:flex;flex-direction:row;align-items:center;">
+                                    <div style="background-color:#F4F4F4;border-radius:50%;flex-grow:0;height:40px;margin-right:14px;width:40px;"></div>
+                                    <div style="display:flex;flex-direction:column;flex-grow:1;justify-content:center;">
+                                        <div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;margin-bottom:6px;width:100px;"></div>
+                                        <div style="background-color:#F4F4F4;border-radius:4px;flex-grow:0;height:14px;width:60px;"></div>
+                                    </div>
+                                </div>
+                                <div style="padding:19% 0;"></div>
+                                <div style="display:block;height:50px;margin:0 auto 12px;width:50px;">
+                                    <svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511,-20)" fill="#000"><path d="M556.869,30.41C554.814,30.41 553.148,32.076 553.148,34.131C553.148,36.186 554.814,37.852 556.869,37.852C558.924,37.852 560.59,36.186 560.59,34.131C560.59,32.076 558.924,30.41 556.869,30.41M541,60.657C535.114,60.657 530.342,55.887 530.342,50C530.342,44.114 535.114,39.342 541,39.342C546.887,39.342 551.658,44.114 551.658,50C551.658,55.887 546.887,60.657 541,60.657M541,33.886C532.1,33.886 524.886,41.1 524.886,50C524.886,58.899 532.1,66.113 541,66.113C549.9,66.113 557.115,58.899 557.115,50C557.115,41.1 549.9,33.886 541,33.886M565.378,62.101C565.244,65.022 564.756,66.606 564.346,67.663C563.803,69.06 563.154,70.057 562.106,71.106C561.058,72.155 560.06,72.803 558.662,73.347C557.607,73.757 556.021,74.244 553.102,74.378C549.944,74.521 548.997,74.552 541,74.552C533.003,74.552 532.056,74.521 528.898,74.378C525.979,74.244 524.393,73.757 523.338,73.347C521.94,72.803 520.942,72.155 519.894,71.106C518.846,70.057 518.197,69.06 517.654,67.663C517.244,66.606 516.755,65.022 516.623,62.101C516.479,58.943 516.448,57.996 516.448,50C516.448,42.003 516.479,41.056 516.623,37.899C516.755,34.978 517.244,33.391 517.654,32.338C518.197,30.938 518.846,29.942 519.894,28.894C520.942,27.846 521.94,27.196 523.338,26.654C524.393,26.244 525.979,25.756 528.898,25.623C532.057,25.479 533.004,25.448 541,25.448C548.997,25.448 549.943,25.479 553.102,25.623C556.021,25.756 557.607,26.244 558.662,26.654C560.06,27.196 561.058,27.846 562.106,28.894C563.154,29.942 563.803,30.938 564.346,32.338C564.756,33.391 565.244,34.978 565.378,37.899C565.522,41.056 565.552,42.003 565.552,50C565.552,57.996 565.522,58.943 565.378,62.101M570.82,37.631C570.674,34.438 570.167,32.258 569.425,30.349C568.659,28.377 567.633,26.702 565.965,25.035C564.297,23.368 562.623,22.342 560.652,21.575C558.743,20.834 556.562,20.326 553.369,20.18C550.169,20.033 549.148,20 541,20C532.853,20 531.831,20.033 528.631,20.18C525.438,20.326 523.257,20.834 521.349,21.575C519.376,22.342 517.703,23.368 516.035,25.035C514.368,26.702 513.342,28.377 512.574,30.349C511.834,32.258 511.326,34.438 511.181,37.631C511.035,40.831 511,41.851 511,50C511,58.147 511.035,59.17 511.181,62.369C511.326,65.562 511.834,67.743 512.574,69.651C513.342,71.625 514.368,73.296 516.035,74.965C517.703,76.634 519.376,77.658 521.349,78.425C523.257,79.167 525.438,79.673 528.631,79.82C531.831,79.965 532.853,80.001 541,80.001C549.148,80.001 550.169,79.965 553.369,79.82C556.562,79.673 558.743,79.167 560.652,78.425C562.623,77.658 564.297,76.634 565.965,74.965C567.633,73.296 568.659,71.625 569.425,69.651C570.167,67.743 570.674,65.562 570.82,62.369C570.966,59.17 571,58.147 571,50C571,41.851 570.966,40.831 570.82,37.631"/></g></g></svg>
+                                </div>
+                                <div style="padding-top:8px;"><div style="color:#3897f0;font-family:Arial,sans-serif;font-size:14px;font-weight:550;line-height:18px;">הצגת פוסט זה באינסטגרם</div></div>
+                                <div style="padding:12.5% 0;"></div>
+                            </a>
+                            <p style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;text-align:center;"><a href="https://www.instagram.com/reel/C5OH_joo8M1/?utm_source=ig_embed&utm_campaign=loading" style="color:#c9c8cd;font-family:Arial,sans-serif;font-size:14px;text-decoration:none;" target="_blank">פוסט משותף על ידי malka lashes (@the_malka_lashes)</a></p>
+                        </div>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS — Title Only -->
+    <div class="products-title-section" data-aos="fade-up">
+        <h2>מגוון המוצרים</h2>
+        <p>מהמותגים המובילים בעולם האסתטיקה</p>
+    </div>
+
+    <!-- ITEMS GALLERY -->
+    <div class="items-grid" data-aos="fade-up">
+        <div class="item-card" onclick="openLightboxItems(0)"><img src="item1.jpg" alt="פריט 1" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(1)"><img src="item2.jpg" alt="פריט 2" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(2)"><img src="item3.jpg" alt="פריט 3" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(3)"><img src="item4.jpg" alt="פריט 4" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <!-- REVIEWS GALLERY -->
+    <div class="reviews-section">
+        <div class="section-header" data-aos="fade-up">
+            <h2>חוות דעת</h2>
+            <p>מה הלקוחות שלי אומרות</p>
+        </div>
+        <div class="reviews-scroll" id="reviews-grid"></div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <section class="section-container" id="appointment">
+        <div class="form-section" data-aos="fade-up">
+            <h2 style="font-family:'Heebo';font-size:clamp(1.8rem,6vw,2.8rem);margin-bottom:36px;text-align:center;color:var(--gold-dark);">תאמי איתי יופי</h2>
+            <form onsubmit="sendMalkaWhatsApp(event)">
+                <input type="text" id="m-name" class="luxury-input" placeholder="שם מלא" required>
+                <input type="tel" id="m-phone" class="luxury-input" placeholder="מספר טלפון ליצירת קשר" required>
+                <textarea id="m-msg" class="luxury-input" rows="5" placeholder="איזה טיפול מעניין אותך היום?"></textarea>
+                <button type="submit" class="btn-whatsapp"><i class="fab fa-whatsapp"></i> שלחי לי הודעה מהירה</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <img src="logo.png" alt="Malka" class="footer-logo">
+    <div class="footer-title">MALKA BOUTIQUE</div>
+    <div style="letter-spacing:5px;color:#ccc;margin-top:10px;">ESTABLISHED 2026</div>
+    <a href="tel:0548033717" class="footer-phone" dir="ltr">054-803-3717</a>
+    <div class="social-flex-row">
+        <a href="https://wa.me/972548033717" class="social-btn-circle wa"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/the_malka_lashes" class="social-btn-circle ig"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="meir-signature">
+        <p>Luxury Landing Page Built by <a href="https://meirweb1.github.io/meir/" class="meir-link">Meir Digital</a></p>
+        <p style="margin-top:10px;opacity:0.5;">All types of pages with personal matching | &copy; 2026</p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script async src="//www.instagram.com/embed.js"></script>
+<script>
+    AOS.init({ duration:1200, once:true, offset:80 });
+
+    // ---- ANIMATED FLOATING STARS ----
+    function initLuxuryStars() {
+        const field = document.getElementById('star-field');
+        const density = window.innerWidth < 768 ? 55 : 130;
+
+        for (let i = 0; i < density; i++) {
+            const s = document.createElement('div');
+            s.className = 'star';
+
+            const size = Math.random() * 4 + 1;
+            s.style.width  = size + 'px';
+            s.style.height = size + 'px';
+            s.style.left   = Math.random() * 100 + '%';
+            s.style.top    = Math.random() * 100 + '%';
+
+            // twinkle timing
+            const twinkleDur = (Math.random() * 4 + 3).toFixed(2) + 's';
+            s.style.setProperty('--twinkle-dur', twinkleDur);
+
+            // float timing (much slower, random)
+            const floatDur = (Math.random() * 20 + 15).toFixed(2) + 's';
+            s.style.setProperty('--float-dur', floatDur);
+
+            // random float offsets (px movement in each axis)
+            const rnd = () => (Math.random() * 40 - 20).toFixed(1) + 'px';
+            s.style.setProperty('--fx1', rnd()); s.style.setProperty('--fy1', rnd());
+            s.style.setProperty('--fx2', rnd()); s.style.setProperty('--fy2', rnd());
+            s.style.setProperty('--fx3', rnd()); s.style.setProperty('--fy3', rnd());
+            s.style.setProperty('--tx',  rnd()); s.style.setProperty('--ty',  rnd());
+
+            // random animation delay so they don't all move in sync
+            s.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
+
+            field.appendChild(s);
+        }
+    }
+    initLuxuryStars();
+
+    // ---- LIGHTBOX SYSTEM ----
+    let lbImages = [];
+    let lbIndex  = 0;
+    let touchStartX = 0;
+
+    const PORTFOLIO_IMAGES = Array.from({length:18}, (_,i) => `image${i+1}.jpg`);
+    const ITEM_IMAGES      = ['item1.jpg','item2.jpg','item3.jpg','item4.jpg'];
+    const REVIEW_IMAGES    = Array.from({length:23}, (_,i) => `${i+1}.jpg`);
+
+    function openLightbox(images, index) {
+        lbImages = images;
+        lbIndex  = index;
+        renderLightbox();
+        document.getElementById('lightbox-overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function renderLightbox() {
+        document.getElementById('lb-img').src = lbImages[lbIndex];
+        document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function lbNav(dir) {
+        lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+        renderLightbox();
+    }
+
+    // Touch / swipe
+    const overlay = document.getElementById('lightbox-overlay');
+    overlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    overlay.addEventListener('touchend',   e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+        if (!document.getElementById('lightbox-overlay').classList.contains('open')) return;
+        if (e.key === 'ArrowLeft')  lbNav(1);
+        if (e.key === 'ArrowRight') lbNav(-1);
+        if (e.key === 'Escape')     closeLightbox();
+    });
+
+    // Close on backdrop click
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+
+    function openLightboxItems(index)  { openLightbox(ITEM_IMAGES,  index); }
+    function openLightboxReview(index) { openLightbox(REVIEW_IMAGES, index); }
+
+    // ---- PORTFOLIO TOGGLE ----
+    let portfolioInjected = false;
+
+    function togglePortfolio() {
+        const thumbs = document.getElementById('portfolio-thumbs');
+        const btn    = document.getElementById('portfolio-btn');
+
+        if (!portfolioInjected) {
+            PORTFOLIO_IMAGES.forEach((src, i) => {
+                const div = document.createElement('div');
+                div.className = 'portfolio-thumb';
+                div.onclick   = () => openLightbox(PORTFOLIO_IMAGES, i);
+                div.innerHTML = `<img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="thumb-overlay"><i class="fas fa-search-plus"></i></div>`;
+                thumbs.appendChild(div);
+            });
+            portfolioInjected = true;
+        }
+
+        const isOpen = thumbs.classList.contains('active');
+        if (isOpen) {
+            thumbs.classList.remove('active');
+            btn.innerHTML = '<i class="fas fa-images"></i> לצפייה בגלריה המלאה';
+        } else {
+            thumbs.classList.add('active');
+            btn.innerHTML = '<i class="fas fa-times"></i> סגור גלריה';
+            setTimeout(() => thumbs.scrollIntoView({behavior:'smooth', block:'start'}), 200);
+        }
+    }
+
+    // ---- REVIEWS GRID — .jpg ----
+    function buildReviews() {
+        const grid = document.getElementById('reviews-grid');
+        REVIEW_IMAGES.forEach((src, i) => {
+            const div = document.createElement('div');
+            div.className = 'review-thumb';
+            div.setAttribute('data-aos', 'fade-up');
+            div.setAttribute('data-aos-delay', String((i % 6) * 80));
+            div.onclick   = () => openLightboxReview(i);
+            div.innerHTML = `<img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'" alt="חוות דעת ${i+1}">`;
+            grid.appendChild(div);
+        });
+        AOS.refresh();
+    }
+    buildReviews();
+
+    // ---- WHATSAPP FORM ----
+    function sendMalkaWhatsApp(e) {
+        e.preventDefault();
+        const name  = document.getElementById('m-name').value;
+        const msg   = document.getElementById('m-msg').value;
+        const phone = document.getElementById('m-phone').value;
+        const full  = `היי מלכה, אני ${name}, אשמח לקבוע תור לטיפול: ${msg}. הטלפון שלי: ${phone}`;
+        window.open(`https://wa.me/972548033717?text=${encodeURIComponent(full)}`, '_blank');
+    }
+</script>
+</body>
+</html>
