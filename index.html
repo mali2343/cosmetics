@@ -170,6 +170,12 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
+        .icon-box i {
+    color: var(--gold-light) !important;
+    background: none; /* מוודא שאין רקע שמסתיר */
+    -webkit-text-fill-color: var(--gold-light) !important; /* דורס את הגרדיאנט אם קיים */
+}
+
         /* --- Treatments Section --- */
         .section-container {
             padding: 120px 20px;
@@ -216,6 +222,7 @@
         .card-treatment {
             background: var(--white-glass);
             backdrop-filter: blur(20px);
+            color: var(--gold-light) !important;
             padding: 60px 40px;
             border-radius: 40px;
             text-align: center;
@@ -567,22 +574,19 @@
             </div>
 
 <div class="card-treatment" data-aos="fade-up" data-aos-delay="200">
-    <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 3rem; color: var(--gold-dark); margin-bottom: 20px;"></i>
-    
-    <h3 style="font-family: 'Heebo', sans-serif; font-weight: 800; margin-bottom: 15px;">שעוות פנים וגוף</h3>
-    
-    <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-dark);">
-        טיפול שנעשה באופן עדין מקצועי לתוצאות חלקות.
-    </p>
+    <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 3rem; color: var(--gold-dark);"></i>
+    <h3>שעוות פנים וגוף</h3>
+    <p>טיפול שנעשה באופן עדין מקצועי לתוצאות חלקות.</p>
 </div>
 
-        <div class="jewelry-promo" data-aos="zoom-in" data-aos-offset="200">
-            <p>
-                בנוסף ניתן למצוא בקליניקה מוצרי עיצוב שיקום וטיפוח <br>
-                ומגוון תכשיטים כסף וגולדפיד מהממים שנעשו בעבודת יד
-            </p>
-        </div>
-    </section>
+<section class="extra-info" data-aos="fade-up" style="text-align: center; padding: 80px 20px; max-width: 900px; margin: 0 auto;">
+    <div style="height: 2px; background: var(--gold-gradient); width: 100px; margin: 0 auto 30px;"></div>
+    <p style="font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 600; line-height: 1.8; color: var(--text-dark); font-family: 'Assistant', sans-serif;">
+        בנוסף ניתן למצוא בקליניקה מוצרי עיצוב שיקום וטיפוח <br> 
+        ומגוון תכשיטים כסף וגולדפילד מהממים שנעשו בעבודת יד
+    </p>
+    <div style="height: 2px; background: var(--gold-gradient); width: 100px; margin: 30px auto 0;"></div>
+</section>
 
     <section class="section-container">
         <div class="why-me-wrap">
@@ -636,6 +640,23 @@
         </div>
     </div>
 
+<section id="contact" class="section-container" data-aos="fade-up">
+    <div style="background: white; padding: 40px; border-radius: 40px; box-shadow: var(--shadow-light); max-width: 600px; margin: 0 auto; border: 1px solid var(--luxury-pink);">
+        <h2 style="text-align: center; color: var(--gold-dark); margin-bottom: 30px; font-family: 'Heebo';">דברי איתי</h2>
+        
+        <form style="display: flex; flex-direction: column; gap: 20px;">
+            <input type="text" placeholder="שם מלא" style="padding: 15px; border-radius: 15px; border: 1px solid #eee; background: #fafafa; font-family: 'Assistant';">
+            <input type="tel" placeholder="טלפון" style="padding: 15px; border-radius: 15px; border: 1px solid #eee; background: #fafafa; font-family: 'Assistant';">
+            <textarea placeholder="איזה טיפול מעניין אותך?" rows="4" style="padding: 15px; border-radius: 15px; border: 1px solid #eee; background: #fafafa; font-family: 'Assistant';"></textarea>
+            
+            <button type="submit" class="btn-luxury" style="width: 100%; font-size: 1.1rem; letter-spacing: 1px;">
+                שליחת הודעה
+            </button>
+        </form>
+    </div>
+</section>
+
+            
     <footer>
         <img src="logo.png" alt="Malka Boutique" class="footer-logo" data-aos="zoom-in">
         <div style="font-weight: 800; font-size: 1.4rem; color: var(--gold-text);">MALKA BOUTIQUE • EST. 2026</div>
