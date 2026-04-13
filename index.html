@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="MALKA BOUTIQUE - Luxury Aesthetics & Jewelry">
     <title>MALKA BOUTIQUE | Luxury Aesthetics</title>
     
@@ -21,6 +21,7 @@
             --gold-light: #f1e0b5;
             --gold-dark: #c5a059;
             --gold-gradient: linear-gradient(135deg, #c5a059 0%, #f1e0b5 50%, #c5a059 100%);
+            /* התיקון לרקע כדי שיעבוד חזק בטלפון */
             --luxury-gradient: linear-gradient(135deg, var(--cream) 0%, var(--luxury-pink) 25%, var(--user-color) 75%, #fdeeee 100%);
             --text-dark: #2d2424;
             --gold-text: #b18d4b;
@@ -42,17 +43,21 @@
 
         html {
             scroll-behavior: smooth;
+            height: -webkit-fill-available;
         }
 
         body {
             font-family: 'Assistant', sans-serif;
+            background: var(--user-color); /* Fallback */
             background: var(--luxury-gradient);
             background-attachment: fixed;
             background-size: cover;
+            background-repeat: no-repeat;
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.7;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
         }
 
         /* --- Moving Stars Animation --- */
@@ -326,8 +331,8 @@
             display: flex;
             justify-content: center;
             gap: 25px;
-            flex-wrap: wrap;
             margin-top: 70px;
+            flex-wrap: wrap;
         }
 
         .btn-luxury {
@@ -422,14 +427,13 @@
         .nav-next { left: -30px; }
         .nav-prev { right: -30px; }
 
-        /* --- Mobile Optimization (Crucial) --- */
+        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
             .hero-title { font-size: 4.5rem; }
             .section-container { padding: 80px 15px; }
 
-            /* תפריט טיפולים קומפקטי לנייד */
             .services-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2 בטור במקום גלילה אינסופית */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
 
@@ -452,7 +456,7 @@
                 font-size: 0.9rem;
                 line-height: 1.4;
                 display: -webkit-box;
-                -webkit-line-clamp: 4; /* הגבלה ל-4 שורות */
+                -webkit-line-clamp: 4;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
@@ -582,39 +586,19 @@
             <h2 class="title-luxury" data-aos="fade-in">למה לבחור דווקא בי?</h2>
             
             <div class="why-cards-grid">
-                <div class="pop-card" data-aos="flip-left">
-                    <i class="fas fa-heart"></i> יחס אישי
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="100">
-                    <i class="fas fa-comments"></i> תיאום ציפיות
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="200">
-                    <i class="fas fa-shield-halved"></i> מקצועיות
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="300">
-                    <i class="fas fa-gem"></i> חומרים איכותיים
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="400">
-                    <i class="fas fa-crosshairs"></i> דיוק מקסימלי
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="500">
-                    <i class="fas fa-layer-group"></i> מגוון טיפולים
-                </div>
-                <div class="pop-card" data-aos="flip-left" data-aos-delay="600">
-                    <i class="fas fa-couch"></i> אווירה נעימה
-                </div>
+                <div class="pop-card" data-aos="flip-left"><i class="fas fa-heart"></i> יחס אישי</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="100"><i class="fas fa-comments"></i> תיאום ציפיות</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="200"><i class="fas fa-shield-halved"></i> מקצועיות</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="300"><i class="fas fa-gem"></i> חומרים איכותיים</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="400"><i class="fas fa-crosshairs"></i> דיוק מקסימלי</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="500"><i class="fas fa-layer-group"></i> מגוון טיפולים</div>
+                <div class="pop-card" data-aos="flip-left" data-aos-delay="600"><i class="fas fa-couch"></i> אווירה נעימה</div>
             </div>
 
             <div class="action-btns">
-                <button class="btn-luxury" onclick="showModal('work-modal')">
-                    <i class="fas fa-images"></i> תיק עבודות
-                </button>
-                <button class="btn-luxury" onclick="showModal('recommend-modal')">
-                    <i class="fas fa-star-and-crescent"></i> לקוחות ממליצות
-                </button>
-                <button class="btn-luxury" onclick="showModal('shop-modal')">
-                    <i class="fas fa-ring"></i> קולקציית מוצרים
-                </button>
+                <button class="btn-luxury" onclick="showModal('work-modal')"><i class="fas fa-images"></i> תיק עבודות</button>
+                <button class="btn-luxury" onclick="showModal('recommend-modal')"><i class="fas fa-star-and-crescent"></i> לקוחות ממליצות</button>
+                <button class="btn-luxury" onclick="showModal('shop-modal')"><i class="fas fa-ring"></i> קולקציית מוצרים</button>
             </div>
         </div>
     </section>
@@ -625,7 +609,7 @@
             <div class="slide-nav nav-next" onclick="scrollSlide('work-engine', 1)"><i class="fas fa-chevron-left"></i></div>
             <div class="slide-nav nav-prev" onclick="scrollSlide('work-engine', -1)"><i class="fas fa-chevron-right"></i></div>
             <div class="slider-engine" id="work-engine">
-                <div class="slide-unit"><video controls playsinline poster="logo.png"><source src="video1.mp4" type="video/mp4"></video></div>
+                <div class="slide-unit"><video controls playsinline><source src="video1.mp4" type="video/mp4"></video></div>
                 <div class="slide-unit"><video controls playsinline><source src="video2.mp4" type="video/mp4"></video></div>
             </div>
         </div>
@@ -654,112 +638,61 @@
         <div style="font-weight: 800; font-size: 1.4rem; color: var(--gold-text);">MALKA BOUTIQUE • EST. 2026</div>
         <p>מעניקה לך את המראה המושלם שמגיע לך בדיוק מקסימלי.</p>
         <a href="tel:0548033717" class="contact-number">054-803-3717</a>
-        <div class="social-bar" style="justify-content: center; margin-top: 20px;">
-            <a href="https://wa.me/972548033717" class="social-icon wa-color" style="width: 50px; height: 50px; font-size: 22px;"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/the_malka_lashes" class="social-icon ig-color" style="width: 50px; height: 50px; font-size: 22px;"><i class="fab fa-instagram"></i></a>
-        </div>
         <div class="signature">Boutique Website Built by <strong>Meir Digital</strong> | All Rights Reserved</div>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialization of AOS
-        AOS.init({
-            duration: 1200,
-            once: true,
-            offset: 100
-        });
+        AOS.init({ duration: 1200, once: true, offset: 100 });
 
-        /* --- Dynamic Star Background Generation --- */
         function initStars() {
-            const starField = document.getElementById('star-field');
-            const count = 75; // More stars for more lines
-            
-            for (let i = 0; i < count; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
+            const field = document.getElementById('star-field');
+            for (let i = 0; i < 75; i++) {
+                const s = document.createElement('div');
+                s.className = 'star';
                 const size = Math.random() * 4 + 1;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const duration = Math.random() * 4 + 3;
-                const delay = Math.random() * 8;
-                
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = posX + '%';
-                star.style.top = posY + '%';
-                star.style.setProperty('--duration', duration + 's');
-                star.style.animationDelay = delay + 's';
-                
-                starField.appendChild(star);
+                s.style.width = s.style.height = size + 'px';
+                s.style.left = Math.random() * 100 + '%';
+                s.style.top = Math.random() * 100 + '%';
+                s.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
+                s.style.animationDelay = Math.random() * 8 + 's';
+                field.appendChild(s);
             }
         }
         initStars();
 
-        /* --- Dynamic Gallery Loader --- */
         function fillGallery(elementId, amount, prefix) {
             const container = document.getElementById(elementId);
             for (let i = 1; i <= amount; i++) {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'slide-unit';
-                
-                const media = document.createElement('img');
-                media.loading = "lazy";
-                
-                if (prefix === 'work') media.src = `image${i}.jpg`;
-                if (prefix === 'feed') media.src = `${i}.jpg`;
-                if (prefix === 'item') media.src = `item${i}.jpg`;
-                
-                media.onerror = function() {
-                    wrapper.style.display = 'none';
-                };
-                
-                wrapper.appendChild(media);
+                const img = document.createElement('img');
+                img.loading = "lazy";
+                if (prefix === 'work') img.src = `image${i}.jpg`;
+                if (prefix === 'feed') img.src = `${i}.jpg`;
+                if (prefix === 'item') img.src = `item${i}.jpg`;
+                img.onerror = () => wrapper.style.display = 'none';
+                wrapper.appendChild(img);
                 container.appendChild(wrapper);
             }
         }
 
-        // Fill all three sliders
         fillGallery('work-engine', 18, 'work');
         fillGallery('recommend-engine', 23, 'feed');
         fillGallery('shop-engine', 15, 'item');
 
-        /* --- Modal Control Logic --- */
-        function showModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.add('modal-active');
-            document.body.style.overflow = 'hidden'; // Stop scrolling
+        function showModal(id) { document.getElementById(id).classList.add('modal-active'); document.body.style.overflow = 'hidden'; }
+        function hideModal(id) { document.getElementById(id).classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
+        function scrollSlide(id, dir) { 
+            const e = document.getElementById(id); 
+            e.scrollBy({ left: dir * e.clientWidth * -1, behavior: 'smooth' }); 
         }
 
-        function hideModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.remove('modal-active');
-            document.body.style.overflow = 'auto'; // Resume scrolling
-        }
-
-        /* --- Custom Slider Logic --- */
-        function scrollSlide(engineId, direction) {
-            const engine = document.getElementById(engineId);
-            const step = engine.clientWidth;
-            engine.scrollBy({
-                left: direction * step * -1, // RTL adjustment
-                behavior: 'smooth'
-            });
-        }
-
-        /* --- Keyboard Support --- */
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                const modals = document.querySelectorAll('.gallery-modal');
-                modals.forEach(m => m.classList.remove('modal-active'));
+                document.querySelectorAll('.gallery-modal').forEach(m => m.classList.remove('modal-active'));
                 document.body.style.overflow = 'auto';
             }
-        });
-
-        // Anti-Right-Click for protection (Optional)
-        document.addEventListener('contextmenu', (e) => {
-            // e.preventDefault(); 
         });
     </script>
 </body>
