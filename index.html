@@ -443,8 +443,11 @@
 
         /* --- Full Mobile View Refactoring --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 4.2rem; }
-            .section-container { padding: 60px 10px; }
+            .hero-title { 
+                font-size: 3.2rem; /* הקטנו מ-4.2 כדי שיכנס בשורה אחת */
+                white-space: nowrap; /* מבטיח שהטקסט לא ירד שורה בשום מצב */
+            }
+        }
 
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
