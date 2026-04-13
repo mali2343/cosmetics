@@ -620,6 +620,38 @@
         background-position: 200% center;
     }
 }
+
+
+.luxury-slogan {
+    font-family: 'Heebo', sans-serif;
+    font-size: clamp(1rem, 4vw, 1.4rem); /* גודל אלגנטי שלא גונב את ההצגה מהלוגו */
+    font-weight: 500;
+    letter-spacing: 3px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    
+    /* אפקט Rose Gold יוקרתי ומשתלב */
+    background: linear-gradient(135deg, 
+        var(--gold-text) 0%, 
+        var(--rose-dust) 50%, 
+        var(--gold-text) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    /* הוספת זוהר עדין */
+    filter: drop-shadow(0 2px 4px rgba(214, 164, 164, 0.3));
+    
+    opacity: 0.9;
+    animation: fadeInSlogan 2s ease-in-out forwards;
+}
+
+/* אנימציית כניסה רכה */
+@keyframes fadeInSlogan {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 0.9; transform: translateY(0); }
+}
+
         
     </style>
 </head>
@@ -634,6 +666,7 @@
         
         <div data-aos="fade-up" data-aos-delay="400">
             <h1 class="hero-title">מלכה • בוטיק</h1>
+            <p class="luxury-slogan">טבעיות. פשטות. שלמות.</p>
             <p class="hero-subtitle">Professional Aesthetics</p>
         </div>
         
