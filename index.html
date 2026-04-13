@@ -40,9 +40,30 @@
             -webkit-font-smoothing:antialiased;
         }
 
-        #star-field { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; }
-        .star { position:absolute; background:var(--gold-dark); border-radius:50%; opacity:0.3; animation:twinkle var(--duration) infinite ease-in-out; }
-        @keyframes twinkle { 0%,100%{opacity:0.1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+        /* ---- ANIMATED STARS ---- */
+        #star-field { position:fixed; top:0; left:0; width:100%; height:100%; z-index:1; pointer-events:none; overflow:hidden; }
+
+        .star {
+            position:absolute;
+            background:var(--gold-dark);
+            border-radius:50%;
+            animation:
+                twinkle var(--twinkle-dur) infinite ease-in-out,
+                floatStar var(--float-dur) infinite linear;
+        }
+
+        @keyframes twinkle {
+            0%,100% { opacity:0.1; transform:scale(1) translate(0,0); }
+            50%      { opacity:0.7; transform:scale(1.4) translate(var(--tx), var(--ty)); }
+        }
+
+        @keyframes floatStar {
+            0%   { transform:translate(0, 0); }
+            25%  { transform:translate(var(--fx1), var(--fy1)); }
+            50%  { transform:translate(var(--fx2), var(--fy2)); }
+            75%  { transform:translate(var(--fx3), var(--fy3)); }
+            100% { transform:translate(0, 0); }
+        }
 
         /* HEADER */
         header {
@@ -53,7 +74,7 @@
         }
         .logo-wrap { margin-bottom:30px; }
         .logo-img {
-            width:clamp(150px,22vw,200px);
+            width:clamp(130px,22vw,200px);
             border-radius:50%;
             box-shadow:var(--shadow-bold);
             border:5px solid white;
@@ -62,39 +83,39 @@
         .logo-img:hover { transform:scale(1.08) rotate(3deg); }
         .hero-h1 {
             font-family:'Heebo',sans-serif;
-            font-size:clamp(3.8rem,16vw,9.5rem);
+            font-size:clamp(3rem,14vw,9.5rem);
             font-weight:900;
             color:var(--rose-dust);
-            line-height:0.8;
+            line-height:0.85;
             margin-bottom:20px;
         }
         .main-slogan {
             font-family:'Heebo',sans-serif;
-            font-size:clamp(1.2rem,5vw,1.9rem);
+            font-size:clamp(1rem,4vw,1.9rem);
             font-weight:600;
-            letter-spacing:5px;
+            letter-spacing:4px;
             background:linear-gradient(135deg,var(--gold-text),var(--rose-dust),var(--gold-text));
             -webkit-background-clip:text;
             -webkit-text-fill-color:transparent;
         }
-        .sub-tagline { margin-top:15px; font-size:1.3rem; font-weight:700; color:var(--text-dark); letter-spacing:1px; }
+        .sub-tagline { margin-top:15px; font-size:clamp(1rem,3vw,1.3rem); font-weight:700; color:var(--text-dark); letter-spacing:1px; }
 
         /* SECTIONS */
-        .section-container { padding:120px 24px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
-        .section-header { text-align:center; margin-bottom:70px; }
-        .section-header h2 { font-family:'Heebo'; font-size:clamp(2.5rem,10vw,5.5rem); font-weight:900; margin-bottom:10px; }
-        .section-header p { font-size:1.4rem; color:var(--gold-text); font-weight:600; }
+        .section-container { padding:80px 20px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
+        .section-header { text-align:center; margin-bottom:60px; }
+        .section-header h2 { font-family:'Heebo'; font-size:clamp(2rem,8vw,5.5rem); font-weight:900; margin-bottom:10px; }
+        .section-header p { font-size:clamp(1rem,3vw,1.4rem); color:var(--gold-text); font-weight:600; }
 
         /* TREATMENT CARDS */
         .treatment-grid {
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:30px;
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+            gap:24px;
         }
         .treatment-card {
             background:linear-gradient(145deg,#fff 60%,#fdeef0 100%);
-            padding:50px 35px;
-            border-radius:40px;
+            padding:40px 28px;
+            border-radius:36px;
             box-shadow:var(--shadow-soft);
             transition:var(--transition-smooth);
             text-align:center;
@@ -105,13 +126,10 @@
         .treatment-card::before {
             content:'';
             position:absolute;
-            top:-60%;
-            left:-60%;
-            width:120%;
-            height:120%;
+            top:-60%; left:-60%;
+            width:120%; height:120%;
             background:radial-gradient(circle,rgba(214,164,164,0.15) 0%,transparent 70%);
-            opacity:0;
-            transition:opacity 0.5s;
+            opacity:0; transition:opacity 0.5s;
         }
         .treatment-card:hover::before { opacity:1; }
         .treatment-card:hover {
@@ -119,34 +137,35 @@
             box-shadow:var(--shadow-bold);
             border-bottom-color:var(--gold-dark);
         }
-        .treatment-card i { font-size:3.5rem; color:var(--gold-text); margin-bottom:25px; display:block; transition:transform 0.4s; }
+        .treatment-card i { font-size:3rem; color:var(--gold-text); margin-bottom:20px; display:block; transition:transform 0.4s; }
         .treatment-card:hover i { transform:scale(1.2) rotate(-8deg); }
-        .treatment-card h3 { font-size:1.8rem; font-weight:800; margin-bottom:15px; color:var(--rose-dust); }
-        .treatment-card p { font-size:1.15rem; color:#777; }
+        .treatment-card h3 { font-size:clamp(1.3rem,4vw,1.8rem); font-weight:800; margin-bottom:12px; color:var(--rose-dust); }
+        .treatment-card p { font-size:clamp(0.95rem,2.5vw,1.15rem); color:#777; }
 
         /* WHY ME */
         .why-me-container {
             display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
-            gap:20px;
+            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+            gap:16px;
             margin-top:50px;
         }
         .why-card {
             background:rgba(255,255,255,0.7);
-            padding:30px 20px;
-            border-radius:25px;
+            padding:26px 16px;
+            border-radius:22px;
             font-weight:700;
-            font-size:1.15rem;
+            font-size:clamp(1rem,2.5vw,1.15rem);
             display:flex;
             align-items:center;
             justify-content:center;
-            gap:12px;
+            gap:10px;
             box-shadow:var(--shadow-soft);
             transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.5);
             border:2px solid transparent;
             cursor:default;
+            text-align:center;
         }
-        .why-card i { color:#25d366; font-size:1.4rem; transition:transform 0.4s; }
+        .why-card i { color:#25d366; font-size:1.3rem; transition:transform 0.4s; flex-shrink:0; }
         .why-card:hover {
             background:white;
             transform:scale(1.08) translateY(-6px);
@@ -156,15 +175,15 @@
         }
         .why-card:hover i { transform:scale(1.3) rotate(15deg); color:var(--gold-text); }
 
-        /* PORTFOLIO / GALLERY */
-        .gallery-trigger-area { margin:80px 0; text-align:center; }
-        .section-title { font-family:'Heebo'; font-size:clamp(2.5rem,8vw,4.5rem); font-weight:900; margin-bottom:40px; }
+        /* PORTFOLIO */
+        .gallery-trigger-area { margin:60px 0; text-align:center; }
+        .section-title { font-family:'Heebo'; font-size:clamp(2rem,7vw,4.5rem); font-weight:900; margin-bottom:36px; }
         .btn-gallery {
             background:var(--text-dark);
             color:white;
-            padding:25px 55px;
+            padding:20px 44px;
             border-radius:60px;
-            font-size:1.4rem;
+            font-size:clamp(1.1rem,3vw,1.4rem);
             font-weight:900;
             border:none;
             cursor:pointer;
@@ -186,7 +205,7 @@
         }
         #lightbox-overlay.open { display:flex; }
         #lightbox-overlay img {
-            max-width:90vw;
+            max-width:92vw;
             max-height:80vh;
             border-radius:16px;
             object-fit:contain;
@@ -196,60 +215,51 @@
         }
         .lb-close {
             position:absolute;
-            top:20px;
-            left:25px;
-            color:white;
-            font-size:2.5rem;
+            top:16px; left:16px;
+            color:white; font-size:2rem;
             cursor:pointer;
-            background:rgba(255,255,255,0.1);
-            border:none;
-            border-radius:50%;
-            width:55px;height:55px;
-            display:flex;align-items:center;justify-content:center;
+            background:rgba(255,255,255,0.15);
+            border:none; border-radius:50%;
+            width:50px; height:50px;
+            display:flex; align-items:center; justify-content:center;
             transition:background 0.3s;
+            z-index:10001;
         }
-        .lb-close:hover { background:rgba(255,255,255,0.3); }
+        .lb-close:hover { background:rgba(255,255,255,0.35); }
         .lb-arrow {
             position:absolute;
-            top:50%;
-            transform:translateY(-50%);
-            color:white;
-            font-size:2.5rem;
+            top:50%; transform:translateY(-50%);
+            color:white; font-size:2rem;
             cursor:pointer;
-            background:rgba(255,255,255,0.1);
-            border:none;
-            border-radius:50%;
-            width:60px;height:60px;
-            display:flex;align-items:center;justify-content:center;
+            background:rgba(255,255,255,0.12);
+            border:none; border-radius:50%;
+            width:54px; height:54px;
+            display:flex; align-items:center; justify-content:center;
             transition:background 0.3s;
             z-index:10000;
         }
         .lb-arrow:hover { background:rgba(255,255,255,0.3); }
-        .lb-prev { right:20px; }
-        .lb-next { left:20px; }
+        .lb-prev { right:12px; }
+        .lb-next { left:12px; }
         .lb-counter {
-            position:absolute;
-            bottom:25px;
+            position:absolute; bottom:22px;
             color:rgba(255,255,255,0.7);
-            font-size:1.1rem;
-            font-family:'Assistant';
+            font-size:1rem; font-family:'Assistant';
         }
 
-        /* PORTFOLIO THUMBS (shown in section) */
-        .portfolio-thumbs {
-            display:none;
-        }
+        /* PORTFOLIO THUMBS */
+        .portfolio-thumbs { display:none; }
         .portfolio-thumbs.active {
             display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-            gap:14px;
-            padding:30px 0;
+            grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+            gap:12px;
+            padding:28px 0;
             animation:fadeInUp 0.6s ease;
         }
         @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
 
         .portfolio-thumb {
-            border-radius:16px;
+            border-radius:14px;
             overflow:hidden;
             cursor:pointer;
             aspect-ratio:1;
@@ -265,19 +275,17 @@
             position:absolute;inset:0;
             background:rgba(197,160,89,0);
             display:flex;align-items:center;justify-content:center;
-            color:white;font-size:2rem;opacity:0;
+            color:white;font-size:1.8rem;opacity:0;
             transition:all 0.3s;
         }
         .portfolio-thumb:hover .thumb-overlay { background:rgba(197,160,89,0.3);opacity:1; }
 
-        /* INSTAGRAM VIDEOS */
-        .instagram-section {
-            margin:60px 0;
-        }
+        /* INSTAGRAM */
+        .instagram-section { margin:50px 0; }
         .instagram-grid {
             display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-            gap:30px;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:28px;
             justify-items:center;
         }
         .instagram-embed-wrap {
@@ -288,44 +296,45 @@
             box-shadow:var(--shadow-bold);
         }
 
-        /* PRODUCTS BANNER */
-        .promo-banner {
-            background:white;
-            padding:80px 40px;
-            border-radius:60px;
-            margin:100px 0;
-            box-shadow:var(--shadow-bold);
-            display:flex;
-            flex-direction:column;
-            align-items:center;
+        /* PRODUCTS BANNER — simplified */
+        .products-title-section {
             text-align:center;
-            border:2px solid var(--gold-light);
+            padding:70px 20px 20px;
+            position:relative;
+            z-index:10;
+            max-width:1400px;
+            margin:0 auto;
         }
-        .promo-banner h2 { font-size:clamp(2.2rem,6vw,3.5rem); font-family:'Heebo'; margin-bottom:25px; }
-        .promo-banner p { font-size:1.35rem; max-width:800px; color:#555; line-height:1.7; }
-        .jewelry-tag {
-            display:inline-block;
-            margin-top:30px;
-            padding:15px 35px;
-            background:var(--gold-dark);
-            color:white;
-            border-radius:50px;
-            font-weight:800;
+        .products-title-section h2 {
+            font-family:'Heebo';
+            font-size:clamp(2.2rem,8vw,5rem);
+            font-weight:900;
+            color:var(--rose-dust);
+            margin-bottom:12px;
+        }
+        .products-title-section p {
+            font-size:clamp(1rem,3vw,1.3rem);
+            color:var(--gold-text);
+            font-weight:600;
             letter-spacing:2px;
         }
 
         /* ITEMS GALLERY */
         .items-grid {
             display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-            gap:20px;
-            margin-top:40px;
+            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+            gap:18px;
+            margin-top:36px;
+            max-width:1400px;
+            margin-left:auto;
+            margin-right:auto;
+            padding:0 20px;
         }
         .item-card {
             border-radius:20px;
             overflow:hidden;
             background:white;
-            padding:10px;
+            padding:8px;
             box-shadow:var(--shadow-soft);
             transition:var(--transition-smooth);
             cursor:pointer;
@@ -334,22 +343,22 @@
         .item-card:hover { transform:translateY(-8px);box-shadow:var(--shadow-bold); }
         .item-card:hover img { transform:scale(1.05); }
 
-        /* REVIEWS GALLERY */
-        .reviews-section { padding:80px 24px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
+        /* REVIEWS */
+        .reviews-section { padding:60px 20px; max-width:1400px; margin:0 auto; position:relative; z-index:10; }
         .reviews-scroll {
             display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-            gap:16px;
-            margin-top:40px;
+            grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+            gap:14px;
+            margin-top:36px;
         }
         .review-thumb {
-            border-radius:16px;
+            border-radius:14px;
             overflow:hidden;
             cursor:pointer;
             box-shadow:var(--shadow-soft);
             transition:var(--transition-smooth);
             background:#fff;
-            padding:6px;
+            padding:5px;
         }
         .review-thumb img { width:100%;border-radius:10px;display:block;aspect-ratio:3/4;object-fit:cover; }
         .review-thumb:hover { transform:scale(1.04) translateY(-4px);box-shadow:var(--shadow-bold); }
@@ -357,33 +366,33 @@
         /* FORM */
         .form-section {
             background:white;
-            padding:80px 50px;
-            border-radius:60px;
+            padding:60px 40px;
+            border-radius:50px;
             max-width:850px;
             margin:0 auto;
             box-shadow:var(--shadow-bold);
         }
         .luxury-input {
             width:100%;
-            padding:22px;
-            border-radius:25px;
+            padding:20px;
+            border-radius:22px;
             border:1px solid #eee;
             background:var(--cream);
-            margin-bottom:25px;
+            margin-bottom:22px;
             font-family:'Assistant';
-            font-size:1.2rem;
+            font-size:1.1rem;
             transition:0.3s;
             display:block;
         }
         .luxury-input:focus { border-color:var(--rose-dust);outline:none;background:white; }
         .btn-whatsapp {
             width:100%;
-            padding:28px;
+            padding:24px;
             background:var(--text-dark);
             color:white;
-            border-radius:35px;
+            border-radius:32px;
             border:none;
-            font-size:1.7rem;
+            font-size:clamp(1.2rem,4vw,1.7rem);
             font-weight:900;
             cursor:pointer;
             transition:var(--transition-bounce);
@@ -393,47 +402,54 @@
         /* FOOTER */
         footer {
             text-align:center;
-            padding:120px 20px 60px;
+            padding:100px 20px 50px;
             background:white;
             border-top:1px solid var(--luxury-pink);
             position:relative;
             z-index:100;
         }
-        .footer-logo { width:140px;border-radius:50%;margin-bottom:30px; }
-        .footer-title { font-family:'Heebo';font-weight:900;font-size:2.8rem;color:var(--gold-text);letter-spacing:3px; }
-        .footer-phone { font-size:clamp(2rem,8vw,3rem);font-weight:900;color:var(--text-dark);text-decoration:none;display:block;margin:40px 0; }
-        .social-flex-row { display:flex !important;flex-direction:row !important;justify-content:center !important;gap:25px !important;margin:50px 0 !important; }
+        .footer-logo { width:120px;border-radius:50%;margin-bottom:26px; }
+        .footer-title { font-family:'Heebo';font-weight:900;font-size:clamp(1.8rem,6vw,2.8rem);color:var(--gold-text);letter-spacing:3px; }
+        .footer-phone {
+            font-size:clamp(1.6rem,6vw,3rem);
+            font-weight:900;color:var(--text-dark);
+            text-decoration:none;display:block;margin:36px 0;
+        }
+        .social-flex-row {
+            display:flex !important; flex-direction:row !important;
+            justify-content:center !important; gap:22px !important; margin:44px 0 !important;
+        }
         .social-btn-circle {
-            width:75px;height:75px;border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            color:white;font-size:32px;text-decoration:none;
+            width:70px; height:70px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            color:white; font-size:30px; text-decoration:none;
             transition:var(--transition-bounce);
             box-shadow:0 10px 20px rgba(0,0,0,0.1);
         }
         .social-btn-circle.wa { background:#25d366; }
         .social-btn-circle.ig { background:linear-gradient(45deg,#f09433,#bc1888); }
         .social-btn-circle:hover { transform:scale(1.15) rotate(10deg); }
-        .meir-signature { border-top:1px solid #f2f2f2;padding-top:40px;margin-top:70px;font-size:1.1rem;color:#ccc; }
+        .meir-signature { border-top:1px solid #f2f2f2;padding-top:36px;margin-top:60px;font-size:1rem;color:#ccc; }
         .meir-link { color:var(--gold-text);font-weight:800;text-decoration:none; }
 
-        /* MOBILE */
+        /* ============ MOBILE ============ */
         @media(max-width:768px){
-            .hero-h1 { font-size:4.5rem; }
-            .section-container { padding:70px 16px; }
-            .form-section { padding:40px 20px;border-radius:35px; }
-            .promo-banner { padding:50px 24px; }
-            .lb-prev { right:8px; }
-            .lb-next { left:8px; }
-            .lb-arrow { width:48px;height:48px;font-size:1.8rem; }
-            .treatment-grid { grid-template-columns:1fr; gap:20px; }
-            .why-me-container { grid-template-columns:1fr 1fr; gap:14px; }
-            .reviews-scroll { grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
-            .portfolio-thumbs.active { grid-template-columns:repeat(3,1fr); gap:10px; }
+            .section-container { padding:55px 14px; }
+            .form-section { padding:36px 18px; border-radius:32px; }
+            .treatment-grid { grid-template-columns:1fr; gap:16px; }
+            .why-me-container { grid-template-columns:1fr 1fr; gap:12px; }
+            .reviews-scroll { grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+            .portfolio-thumbs.active { grid-template-columns:repeat(3,1fr); gap:8px; }
             .instagram-grid { grid-template-columns:1fr; }
+            .items-grid { grid-template-columns:repeat(2,1fr); gap:12px; padding:0 14px; }
+            .lb-prev { right:6px; }
+            .lb-next { left:6px; }
+            .lb-arrow { width:44px; height:44px; font-size:1.5rem; }
         }
         @media(max-width:400px){
             .why-me-container { grid-template-columns:1fr; }
             .portfolio-thumbs.active { grid-template-columns:repeat(2,1fr); }
+            .reviews-scroll { grid-template-columns:repeat(2,1fr); }
         }
     </style>
 </head>
@@ -505,7 +521,7 @@
     </section>
 
     <!-- WHY ME -->
-    <section class="section-container" style="background:rgba(255,255,255,0.4);border-radius:80px;">
+    <section class="section-container" style="background:rgba(255,255,255,0.4);border-radius:70px;">
         <div class="section-header" data-aos="fade-up">
             <h2>למה לבחור דווקא בי?</h2>
             <p>הערכים שמובילים אותי בכל טיפול</p>
@@ -584,25 +600,19 @@
         </div>
     </section>
 
-    <!-- PRODUCTS BOUTIQUE -->
-    <section class="section-container">
-        <div class="promo-banner" data-aos="flip-up">
-            <h2>חנות הבוטיק שלי</h2>
-            <p>בנוסף ניתן למצוא בקליניקה מוצרי עיצוב, שיקום וטיפוח מהמותגים המובילים בעולם האסתטיקה.</p>
-            <p style="margin-top:15px;font-weight:700;color:var(--rose-dust);">
-                ומגוון תכשיטים כסף וגולדפיד מהממים שנעשו בעבודת יד בעיצוב אישי וייחודי!
-            </p>
-            <div class="jewelry-tag">SILVER & GOLD FILLED</div>
+    <!-- PRODUCTS — Title Only -->
+    <div class="products-title-section" data-aos="fade-up">
+        <h2>מגוון המוצרים</h2>
+        <p>מהמותגים המובילים בעולם האסתטיקה</p>
+    </div>
 
-            <!-- 4 ITEMS GALLERY -->
-            <div class="items-grid" style="width:100%;margin-top:50px;" data-aos="fade-up">
-                <div class="item-card" onclick="openLightboxItems(0)"><img src="item1.jpg" alt="פריט 1" onerror="this.parentElement.style.display='none'"></div>
-                <div class="item-card" onclick="openLightboxItems(1)"><img src="item2.jpg" alt="פריט 2" onerror="this.parentElement.style.display='none'"></div>
-                <div class="item-card" onclick="openLightboxItems(2)"><img src="item3.jpg" alt="פריט 3" onerror="this.parentElement.style.display='none'"></div>
-                <div class="item-card" onclick="openLightboxItems(3)"><img src="item4.jpg" alt="פריט 4" onerror="this.parentElement.style.display='none'"></div>
-            </div>
-        </div>
-    </section>
+    <!-- ITEMS GALLERY -->
+    <div class="items-grid" data-aos="fade-up">
+        <div class="item-card" onclick="openLightboxItems(0)"><img src="item1.jpg" alt="פריט 1" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(1)"><img src="item2.jpg" alt="פריט 2" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(2)"><img src="item3.jpg" alt="פריט 3" onerror="this.parentElement.style.display='none'"></div>
+        <div class="item-card" onclick="openLightboxItems(3)"><img src="item4.jpg" alt="פריט 4" onerror="this.parentElement.style.display='none'"></div>
+    </div>
 
     <!-- REVIEWS GALLERY -->
     <div class="reviews-section">
@@ -616,7 +626,7 @@
     <!-- CONTACT FORM -->
     <section class="section-container" id="appointment">
         <div class="form-section" data-aos="fade-up">
-            <h2 style="font-family:'Heebo';font-size:2.8rem;margin-bottom:40px;text-align:center;color:var(--gold-dark);">תאמי איתי יופי</h2>
+            <h2 style="font-family:'Heebo';font-size:clamp(1.8rem,6vw,2.8rem);margin-bottom:36px;text-align:center;color:var(--gold-dark);">תאמי איתי יופי</h2>
             <form onsubmit="sendMalkaWhatsApp(event)">
                 <input type="text" id="m-name" class="luxury-input" placeholder="שם מלא" required>
                 <input type="tel" id="m-phone" class="luxury-input" placeholder="מספר טלפון ליצירת קשר" required>
@@ -646,20 +656,41 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script async src="//www.instagram.com/embed.js"></script>
 <script>
-    AOS.init({ duration:1200, once:true, offset:100 });
+    AOS.init({ duration:1200, once:true, offset:80 });
 
-    // Stars
+    // ---- ANIMATED FLOATING STARS ----
     function initLuxuryStars() {
         const field = document.getElementById('star-field');
-        const density = window.innerWidth < 768 ? 60 : 150;
-        for(let i=0;i<density;i++){
+        const density = window.innerWidth < 768 ? 55 : 130;
+
+        for (let i = 0; i < density; i++) {
             const s = document.createElement('div');
             s.className = 'star';
-            const size = Math.random()*4+1;
-            s.style.width = s.style.height = size+'px';
-            s.style.left = Math.random()*100+'%';
-            s.style.top = Math.random()*100+'%';
-            s.style.setProperty('--duration',(Math.random()*5+3)+'s');
+
+            const size = Math.random() * 4 + 1;
+            s.style.width  = size + 'px';
+            s.style.height = size + 'px';
+            s.style.left   = Math.random() * 100 + '%';
+            s.style.top    = Math.random() * 100 + '%';
+
+            // twinkle timing
+            const twinkleDur = (Math.random() * 4 + 3).toFixed(2) + 's';
+            s.style.setProperty('--twinkle-dur', twinkleDur);
+
+            // float timing (much slower, random)
+            const floatDur = (Math.random() * 20 + 15).toFixed(2) + 's';
+            s.style.setProperty('--float-dur', floatDur);
+
+            // random float offsets (px movement in each axis)
+            const rnd = () => (Math.random() * 40 - 20).toFixed(1) + 'px';
+            s.style.setProperty('--fx1', rnd()); s.style.setProperty('--fy1', rnd());
+            s.style.setProperty('--fx2', rnd()); s.style.setProperty('--fy2', rnd());
+            s.style.setProperty('--fx3', rnd()); s.style.setProperty('--fy3', rnd());
+            s.style.setProperty('--tx',  rnd()); s.style.setProperty('--ty',  rnd());
+
+            // random animation delay so they don't all move in sync
+            s.style.animationDelay = (Math.random() * 10).toFixed(2) + 's';
+
             field.appendChild(s);
         }
     }
@@ -667,25 +698,24 @@
 
     // ---- LIGHTBOX SYSTEM ----
     let lbImages = [];
-    let lbIndex = 0;
+    let lbIndex  = 0;
     let touchStartX = 0;
 
     const PORTFOLIO_IMAGES = Array.from({length:18}, (_,i) => `image${i+1}.jpg`);
-    const ITEM_IMAGES = ['item1.jpg','item2.jpg','item3.jpg','item4.jpg'];
-    const REVIEW_IMAGES = Array.from({length:23}, (_,i) => `${i+1}.png`);
+    const ITEM_IMAGES      = ['item1.jpg','item2.jpg','item3.jpg','item4.jpg'];
+    const REVIEW_IMAGES    = Array.from({length:23}, (_,i) => `${i+1}.jpg`);
 
     function openLightbox(images, index) {
         lbImages = images;
-        lbIndex = index;
+        lbIndex  = index;
         renderLightbox();
         document.getElementById('lightbox-overlay').classList.add('open');
         document.body.style.overflow = 'hidden';
     }
 
     function renderLightbox() {
-        const img = document.getElementById('lb-img');
-        img.src = lbImages[lbIndex];
-        document.getElementById('lb-counter').textContent = (lbIndex+1) + ' / ' + lbImages.length;
+        document.getElementById('lb-img').src = lbImages[lbIndex];
+        document.getElementById('lb-counter').textContent = (lbIndex + 1) + ' / ' + lbImages.length;
     }
 
     function closeLightbox() {
@@ -698,28 +728,26 @@
         renderLightbox();
     }
 
-    // Touch/swipe for mobile
+    // Touch / swipe
     const overlay = document.getElementById('lightbox-overlay');
     overlay.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
-    overlay.addEventListener('touchend', e => {
+    overlay.addEventListener('touchend',   e => {
         const diff = touchStartX - e.changedTouches[0].clientX;
-        if(Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
+        if (Math.abs(diff) > 50) lbNav(diff > 0 ? 1 : -1);
     });
 
-    // Keyboard navigation
+    // Keyboard
     document.addEventListener('keydown', e => {
-        if(!document.getElementById('lightbox-overlay').classList.contains('open')) return;
-        if(e.key === 'ArrowLeft') lbNav(1);
-        if(e.key === 'ArrowRight') lbNav(-1);
-        if(e.key === 'Escape') closeLightbox();
+        if (!document.getElementById('lightbox-overlay').classList.contains('open')) return;
+        if (e.key === 'ArrowLeft')  lbNav(1);
+        if (e.key === 'ArrowRight') lbNav(-1);
+        if (e.key === 'Escape')     closeLightbox();
     });
 
-    // Close on overlay click (but not on img/arrows)
-    overlay.addEventListener('click', e => {
-        if(e.target === overlay) closeLightbox();
-    });
+    // Close on backdrop click
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
 
-    function openLightboxItems(index) { openLightbox(ITEM_IMAGES, index); }
+    function openLightboxItems(index)  { openLightbox(ITEM_IMAGES,  index); }
     function openLightboxReview(index) { openLightbox(REVIEW_IMAGES, index); }
 
     // ---- PORTFOLIO TOGGLE ----
@@ -727,13 +755,13 @@
 
     function togglePortfolio() {
         const thumbs = document.getElementById('portfolio-thumbs');
-        const btn = document.getElementById('portfolio-btn');
+        const btn    = document.getElementById('portfolio-btn');
 
-        if(!portfolioInjected) {
+        if (!portfolioInjected) {
             PORTFOLIO_IMAGES.forEach((src, i) => {
                 const div = document.createElement('div');
                 div.className = 'portfolio-thumb';
-                div.onclick = () => openLightbox(PORTFOLIO_IMAGES, i);
+                div.onclick   = () => openLightbox(PORTFOLIO_IMAGES, i);
                 div.innerHTML = `<img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="thumb-overlay"><i class="fas fa-search-plus"></i></div>`;
                 thumbs.appendChild(div);
             });
@@ -741,25 +769,25 @@
         }
 
         const isOpen = thumbs.classList.contains('active');
-        if(isOpen){
+        if (isOpen) {
             thumbs.classList.remove('active');
             btn.innerHTML = '<i class="fas fa-images"></i> לצפייה בגלריה המלאה';
         } else {
             thumbs.classList.add('active');
             btn.innerHTML = '<i class="fas fa-times"></i> סגור גלריה';
-            setTimeout(() => thumbs.scrollIntoView({behavior:'smooth',block:'start'}), 200);
+            setTimeout(() => thumbs.scrollIntoView({behavior:'smooth', block:'start'}), 200);
         }
     }
 
-    // ---- REVIEWS GRID ----
+    // ---- REVIEWS GRID — .jpg ----
     function buildReviews() {
         const grid = document.getElementById('reviews-grid');
         REVIEW_IMAGES.forEach((src, i) => {
             const div = document.createElement('div');
             div.className = 'review-thumb';
-            div.setAttribute('data-aos','fade-up');
+            div.setAttribute('data-aos', 'fade-up');
             div.setAttribute('data-aos-delay', String((i % 6) * 80));
-            div.onclick = () => openLightboxReview(i);
+            div.onclick   = () => openLightboxReview(i);
             div.innerHTML = `<img src="${src}" loading="lazy" onerror="this.parentElement.style.display='none'" alt="חוות דעת ${i+1}">`;
             grid.appendChild(div);
         });
@@ -767,14 +795,14 @@
     }
     buildReviews();
 
-    // ---- WHATSAPP ----
+    // ---- WHATSAPP FORM ----
     function sendMalkaWhatsApp(e) {
         e.preventDefault();
-        const name = document.getElementById('m-name').value;
-        const msg = document.getElementById('m-msg').value;
+        const name  = document.getElementById('m-name').value;
+        const msg   = document.getElementById('m-msg').value;
         const phone = document.getElementById('m-phone').value;
-        const fullMsg = `היי מלכה, אני ${name}, אשמח לקבוע תור לטיפול: ${msg}. הטלפון שלי: ${phone}`;
-        window.open(`https://wa.me/972548033717?text=${encodeURIComponent(fullMsg)}`, '_blank');
+        const full  = `היי מלכה, אני ${name}, אשמח לקבוע תור לטיפול: ${msg}. הטלפון שלי: ${phone}`;
+        window.open(`https://wa.me/972548033717?text=${encodeURIComponent(full)}`, '_blank');
     }
 </script>
 </body>
