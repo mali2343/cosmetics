@@ -552,6 +552,69 @@
            and maintains structural integrity for professional editing
         */
         .spacer-luxury { height: 50px; width: 100%; }
+
+
+        /* מיכל האפקט בתחתית הדף */
+.splash-container {
+    text-align: center;
+    padding: 60px 0;
+    /* שינוי לרקע כהה מאוד אך משתלב */
+    background: linear-gradient(to bottom, transparent, rgba(45, 36, 36, 0.95)); 
+    overflow: hidden;
+    margin-top: 50px;
+}
+
+/* עיצוב הטקסט בורוד-זהב מותאם */
+.rose-gold-text {
+    font-family: 'Heebo', sans-serif; /* שימוש בפונט של האתר */
+    font-size: clamp(2rem, 8vw, 3.5rem); /* התאמה לנייד */
+    font-weight: 900;
+    display: inline-block;
+    direction: rtl;
+    
+    /* שילוב המשתנים שלך ליצירת Rose Gold */
+    background: linear-gradient(to right, 
+        var(--gold-dark), 
+        var(--luxury-pink), 
+        var(--rose-dust), 
+        var(--gold-dark)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    
+    /* הפעלת האנימציה */
+    animation: splashIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
+               shimmer 4s linear infinite;
+}
+
+/* אנימציית כניסה (ספלאש) */
+@keyframes splashIn {
+    0% {
+        transform: scale(0.3);
+        letter-spacing: -10px;
+        filter: blur(10px);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+        filter: blur(0px);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        letter-spacing: 2px;
+        opacity: 1;
+    }
+}
+
+/* אנימציית נצנוץ למראה מטאלי */
+@keyframes shimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+        
     </style>
 </head>
 <body>
@@ -706,6 +769,11 @@
         </div>
     </section>
 
+    <div class="splash-container">
+         <h2 class="rose-gold-text">טבעיות פשטות שלמות</h2>
+    </div>  
+
+    
     <footer>
         <img src="logo.png" alt="Malka Boutique" class="footer-logo" data-aos="zoom-in">
         <div style="font-weight: 900; font-size: 1.8rem; color: var(--gold-text); letter-spacing: 2px; margin-bottom: 15px;">MALKA BOUTIQUE</div>
@@ -727,6 +795,8 @@
         </div>
     </footer>
 
+
+    
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Initialization of Scroll Animations
