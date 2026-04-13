@@ -90,36 +90,41 @@
 
         /* --- Header Section --- */
 /* --- Header Section --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
+        /* --- Header Section --- */
+        /* --- Header Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
 
-        .logo-box {
-            position: relative;
-            margin-bottom: 40px;
-            /* הסרנו את ה-::after שהיה כאן בעבר */
-        }
+.logo-box {
+    position: relative;
+    margin-bottom: 40px;
+    /* החצים והעיגול המסתובב נמחקו מכאן */
+}
 
-        .logo {
-            width: 220px;
-            height: 220px; /* גובה ורוחב שווים לעיגול מושלם */
-            object-fit: cover; /* מבטיח שהתמונה לא תימתח */
-            border-radius: 50%; /* הופך את התמונה לעיגול */
-            border: 2px solid var(--rose-gold); /* מסגרת דקה ויוקרתית */
-            padding: 5px; /* רווח בין התמונה למסגרת */
-            position: relative;
-            z-index: 2;
-            filter: drop-shadow(var(--shadow));
-            background: white; /* רקע לבן במידה והלוגו שקוף */
-        }
+.logo {
+    width: 220px;
+    height: 220px; /* חובה גובה ורוחב שווים לעיגול */
+    object-fit: cover; /* שומר על יחס התמונה בתוך העיגול */
+    border-radius: 50%; /* הופך את הלוגו לעיגול */
+    border: 2px solid var(--rose-gold); /* מסגרת עדינה במקום החצים */
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(var(--shadow));
+}
 
+/* ביטול האנימציה הישנה כי היא כבר לא בשימוש */
+@keyframes rotate { 
+    from { transform: rotate(0deg); } 
+    to { transform: rotate(360deg); } 
+}
         .hero-title {
             font-size: clamp(3rem, 10vw, 5.5rem);
             line-height: 1;
