@@ -120,24 +120,24 @@
         .logo:hover {
             transform: rotate(5deg) scale(1.05);
         }
-        
-        .hero-title {
-            font-family: 'Heebo', sans-serif;
-            font-size: clamp(3.8rem, 14vw, 8rem);
-            font-weight: 900;
-            letter-spacing: -2px;
+.hero-title {
+    font-family: 'Heebo', sans-serif;
+    font-size: clamp(3.2rem, 14vw, 8rem); /* הגודל המוקטן כדי שלא ירד שורה */
+    font-weight: 900;
+    letter-spacing: -2px;
+    white-space: nowrap; /* מבטיח שהטקסט יישאר בשורה אחת */
     
-    /* הצבע החדש - זהב אחיד */
-            color: var(--gold-text); 
+    /* הצבע הוורדוורד החדש */
+    color: var(--rose-dust); 
     
-    /* ביטול הגדרות ה-Gradient הקודמות */
-            background: none;
-            -webkit-text-fill-color: initial;
-            line-height: 0.9;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-        }
-
+    /* ביטול הגדרות קודמות של גרדיאנט במידה והיו */
+    background: none;
+    -webkit-text-fill-color: initial;
+    
+    line-height: 0.9;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 5px 15px rgba(214, 164, 164, 0.2)); /* צללית ורדרדה עדינה */
+}
         .hero-subtitle {
             font-size: clamp(1.1rem, 5vw, 1.7rem);
             font-weight: 800;
