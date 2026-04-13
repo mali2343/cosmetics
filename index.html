@@ -5,252 +5,235 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MALKA BOUTIQUE | Luxury Aesthetics</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,400&family=Montserrat:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;800&family=Heebo:wght@900&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta property="og:title" content="MALKA BOUTIQUE | Luxury Aesthetics">
-    <meta property="og:description" content="טיפולי יופי פרימיום: הרמת ריסים, עיצוב גבות ושעוות בוטיק.">
-    <meta property="og:image" content="logo.png">
-    <link rel="icon" type="image/png" href="logo.png">
-    <meta name="description" content="מלכה בוטיק - טיפולי אסתטיקה ויופי פרימיום: הרמת ריסים, עיצוב ושיקום גבות, ושעוות בוטיק באווירה יוקרתית.">
-    <meta name="keywords" content="הרמת ריסים, עיצוב גבות, שיקום גבות, שעווה, קליניקה לאסתטיקה, מלכה בוטיק">   
 
     <style>
-        /* --- Root Variables & Design System --- */
-   <style>
-    /* --- מערכת עיצוב יוקרתית מעודכנת --- */
-    :root {
-        --cream: #fffaf9;
-        --luxury-pink: #f8e1e1;
-        --deep-rose: #e5b3b3;
-        --gold-gradient: linear-gradient(135deg, #c5a059 0%, #f1e0b5 50%, #c5a059 100%);
-        --rose-gradient: linear-gradient(135deg, #d6a4a4 0%, #f8e1e1 100%);
-        --text-dark: #2d2424; /* כהה יותר לבולטות */
-        --gold-text: #b18d4b;
-        --shadow: 0 15px 35px rgba(214, 164, 164, 0.3);
-    }
+        :root {
+            --cream: #fffaf9;
+            --luxury-pink: #f8e1e1;
+            --deep-rose: #e5b3b3;
+            --gold-gradient: linear-gradient(135deg, #c5a059 0%, #f1e0b5 50%, #c5a059 100%);
+            --text-dark: #2d2424;
+            --gold-text: #b18d4b;
+            --shadow: 0 15px 35px rgba(214, 164, 164, 0.3);
+        }
 
-    /* --- גופנים בולטים --- */
-    body {
-        font-family: 'Assistant', sans-serif;
-        background: linear-gradient(120deg, #fffaf9 0%, #fdf2f2 100%);
-        color: var(--text-dark);
-        font-weight: 500; /* טקסט רץ עבה יותר */
-    }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    h1, h2, h3, .section-title {
-        font-family: 'Heebo', sans-serif; /* גופן מודרני ובולט */
-        font-weight: 900; /* עובי מקסימלי */
-        letter-spacing: -1px;
-    }
+        body {
+            font-family: 'Assistant', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
 
-    /* --- רקע "חי" --- */
-    .orb-1 { 
-        width: 600px; height: 600px; 
-        background: radial-gradient(circle, rgba(226,180,180,0.4) 0%, rgba(255,255,255,0) 70%);
-        top: -200px; right: -100px; 
-    }
-    .orb-2 { 
-        width: 500px; height: 500px; 
-        background: radial-gradient(circle, rgba(197,160,89,0.2) 0%, rgba(255,255,255,0) 70%);
-        bottom: 10%; left: -100px; 
-    }
+        /* --- Layout Structures --- */
+        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
 
-    /* --- כותרת הירו (Hero) --- */
-    .hero-title {
-        font-size: clamp(3.5rem, 12vw, 6.5rem);
-        background: linear-gradient(to bottom, #3a2d2d, #b18d4b);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 0.9;
-    }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-    .hero-subtitle {
-        font-weight: 800;
-        color: var(--gold-text);
-        letter-spacing: 5px;
-    }
+        .logo {
+            width: 150px;
+            border-radius: 50%;
+            border: 4px solid #f1e0b5;
+            margin-bottom: 20px;
+        }
 
-    /* --- כרטיסי טיפול משודרגים --- */
-    .treatment-card {
-        background: white;
-        border: 2px solid transparent;
-        border-image: linear-gradient(to bottom, var(--luxury-pink), transparent) 1;
-        box-shadow: var(--shadow);
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
+        .hero-title {
+            font-family: 'Heebo', sans-serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            background: linear-gradient(to bottom, #3a2d2d, #b18d4b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .treatment-card:hover {
-        border-image: var(--gold-gradient) 1;
-        transform: translateY(-20px) scale(1.02);
-    }
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
 
-    .card-icon {
-        font-size: 2.2rem;
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        .treatment-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.5s;
+        }
 
-    /* --- כפתורי זהב ורוד --- */
-    .luxury-button {
-        padding: 25px 70px;
-        background: var(--gold-gradient);
-        border: none;
-        color: #fff !important;
-        font-weight: 900;
-        border-radius: 50px;
-        box-shadow: 0 10px 20px rgba(197, 160, 89, 0.4);
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
+        .treatment-card i { font-size: 2.5rem; margin-bottom: 20px; color: var(--gold-text); }
 
-    .luxury-button:hover {
-        transform: scale(1.08);
-        box-shadow: 0 15px 30px rgba(197, 160, 89, 0.6);
-        background: linear-gradient(135deg, #d4af37 0%, #f9f1c0 50%, #d4af37 100%);
-    }
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
 
-    /* --- תגיות (Pills) --- */
-    .pill {
-        background: var(--rose-gradient);
-        border: none;
-        font-weight: 800;
-        color: #3a2d2d;
-        box-shadow: 0 5px 15px rgba(229, 179, 179, 0.4);
-    }
+        .luxury-button {
+            padding: 15px 40px;
+            background: var(--gold-gradient);
+            border-radius: 50px;
+            border: none;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-    /* --- Footer --- */
-    .contact-card {
-        background: linear-gradient(145deg, #fdf2f2, #fff);
-        border: 3px solid #f1e0b5;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-    }
+        /* --- THE GALLERY FIX --- */
+        .gallery-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
 
-    .whatsapp-link {
-        background: #25d366; /* נשאיר ירוק לזיהוי מהיר, אבל נוסיף מסגרת זהב */
-        border: 3px solid #fff;
-    }
+        .overlay-active { display: flex !important; }
 
-    .section-label {
-        color: var(--gold-text);
-        font-weight: 900;
-    }
+        .slider-viewport {
+            width: 90%;
+            max-width: 500px; /* מתאים למובייל ולסרטונים אנכיים */
+            height: 80vh;
+            position: relative;
+        }
 
-    /* תיקון קטן ללוגו שייראה יוקרתי יותר */
-    .logo {
-        border: 4px solid #f1e0b5;
-        box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
-    }
-</style>
+        .main-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            height: 100%;
+            scrollbar-width: none;
+        }
+
+        .main-slider::-webkit-scrollbar { display: none; }
+
+        .slider-item {
+            min-width: 100%;
+            height: 100%;
+            scroll-snap-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slider-item img, .slider-item video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .close-gallery {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 3100;
+        }
+
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            z-index: 3050;
+        }
+        .next { left: -20px; }
+        .prev { right: -20px; }
+
+        /* Footer */
+        .contact-card {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        .whatsapp-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #25d366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-
     <section class="hero">
-        <div class="logo-box" data-aos="zoom-in">
-            <img src="logo.png" alt="Malka Logo" class="logo">
-        </div>
-        <div data-aos="fade-up" data-aos-delay="400">
-            <h1 class="hero-title">מלכה • בוטיק</h1>
-            <p class="hero-subtitle">Pure Beauty Rituals</p>
-            <p style="margin-top: 20px; font-style: italic; opacity: 0.7;">טבעי. פשוט. שלמות.</p>
-        </div>
+        <img src="logo.png" alt="Logo" class="logo" data-aos="zoom-in">
+        <h1 class="hero-title" data-aos="fade-up">מלכה • בוטיק</h1>
+        <p style="letter-spacing: 3px; font-weight: 800; color: var(--gold-text);">PURE BEAUTY RITUALS</p>
     </section>
 
-    <section class="treatments" id="services">
-        <div style="text-align: center;">
-            <span class="section-label" data-aos="fade-in">Our Services</span>
-            <h2 class="section-title" style="font-size: 3.5rem;" data-aos="fade-up">תפריט הטיפולים</h2>
-        </div>
-
+    <section id="services">
+        <h2 style="text-align:center; font-size: 3rem; font-family: 'Heebo';">תפריט הטיפולים</h2>
         <div class="grid-layout">
             <div class="treatment-card" data-aos="fade-up">
-                <i class="fa-solid fa-eye card-icon"></i>
+                <i class="fa-solid fa-eye"></i>
                 <h3>הרמת ריסים</h3>
-                <p>הדגשת הריסים הטבעיים למראה פתוח, מודגש וזוהר ללא צורך במסקרה. תוצאה שמחזיקה שבועות.</p>
+                <p>הדגשת הריסים הטבעיים למראה פתוח וזוהר ללא צורך במסקרה.</p>
             </div>
             <div class="treatment-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-solid fa-feather card-icon"></i>
-                <h3>הרמת גבות</h3>
-                <p>עיצוב וסידור השערה למראה מלא, עשיר וסימטרי המעניק מסגרת מושלמת לעיניים.</p>
-            </div>
-            <div class="treatment-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fa-solid fa-wand-magic-sparkles card-icon"></i>
+                <i class="fa-solid fa-feather"></i>
                 <h3>עיצוב גבות</h3>
-                <p>אדריכלות גבות בהתאמה אישית למבנה הפנים הייחודי שלך. דיוק ברמה של אומנות.</p>
-            </div>
-            <div class="treatment-card" data-aos="fade-up">
-                <i class="fa-solid fa-heart card-icon"></i>
-                <h3>שיקום גבות</h3>
-                <p>תהליך מקצועי להחזרת הצפיפות והיופי הטבעי של הגבה בעזרת חומרים מזינים וסבלנות.</p>
-            </div>
-            <div class="treatment-card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fa-solid fa-paint-brush card-icon"></i>
-                <h3>צביעת ריסים וגבות</h3>
-                <p>שימוש בפיגמנטים איכותיים ליצירת עומק ומראה מודגש שנשאר איתך לאורך זמן.</p>
+                <p>אדריכלות גבות בהתאמה אישית למבנה הפנים שלך.</p>
             </div>
             <div class="treatment-card" data-aos="fade-up" data-aos-delay="200">
-                <i class="fa-solid fa-sparkles card-icon"></i>
+                <i class="fa-solid fa-sparkles"></i>
                 <h3>שעוות בוטיק</h3>
-                <p>הסרת שיער עדינה ומקצועית לפנים ולגוף לתוצאות חלקות ונעימות במיוחד.</p>
+                <p>הסרת שיער עדינה ומקצועית לתוצאות חלקות ונעימות.</p>
             </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 50px;" data-aos="fade-in">
-            <p class="luxury-font" style="font-size: 1.8rem;">"שיופי, פינוק, מקצועיות ותשוקה נפגשים"</p>
-        </div>
-    </section>
-
-    <section class="why-us">
-        <span class="section-label" data-aos="fade-in">The Experience</span>
-        <h2 class="section-title">למה לבחור דווקא בי?</h2>
-        
-        <div class="pills-container">
-            <div class="pill" data-aos="zoom-in">יחס אישי</div>
-            <div class="pill" data-aos="zoom-in" data-aos-delay="100">תיאום ציפיות</div>
-            <div class="pill" data-aos="zoom-in" data-aos-delay="200">מקצועיות שיא</div>
-            <div class="pill" data-aos="zoom-in" data-aos-delay="300">חומרים פרימיום</div>
-            <div class="pill" data-aos="zoom-in" data-aos-delay="400">דיוק מקסימלי</div>
-            <div class="pill" data-aos="zoom-in" data-aos-delay="500">אווירה רגועה</div>
         </div>
 
         <div class="btn-container">
-            <button class="luxury-button" data-aos="fade-up" onclick="toggleGallery('work-gallery')">לצפייה בעבודות שלי</button>
-            <button class="luxury-button" data-aos="fade-up" data-aos-delay="100" onclick="toggleGallery('feedback-gallery')">לצפייה בחוות דעת</button>
-            <button class="luxury-button" data-aos="fade-up" data-aos-delay="200" onclick="toggleGallery('item-gallery')">קולקציית המוצרים</button>
-    
-        </div>
-
-        <div style="margin-top: 60px;" data-aos="fade-up">
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; line-height: 1.4;">
-                בנוסף ניתן למצוא בקליניקה מוצרי עיצוב שיקום וטיפוח, ומגוון תכשיטי כסף וגולדפילד בעבודת יד.
-            </p>
+            <button class="luxury-button" onclick="toggleGallery('work-gallery')">עבודות שלי</button>
+            <button class="luxury-button" onclick="toggleGallery('feedback-gallery')">חוות דעת</button>
         </div>
     </section>
-
-</section>
 
     <div id="work-gallery" class="gallery-overlay">
         <span class="close-gallery" onclick="toggleGallery('work-gallery')">&times;</span>
         <div class="slider-viewport">
+            <div class="nav-arrow next" onclick="scrollSlider('work-slider', 1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="nav-arrow prev" onclick="scrollSlider('work-slider', -1)"><i class="fas fa-chevron-right"></i></div>
+            
             <div class="main-slider" id="work-slider">
                 <div class="slider-item">
-                    <video muted loop playsinline controls style="max-height: 70vh; border-radius: 15px;">
-                        <source src="video1.mp4" type="video/mp4">
-                    </video>
+                    <video controls playsinline><source src="video1.mp4" type="video/mp4"></video>
                 </div>
                 <div class="slider-item">
-                    <video muted loop playsinline controls style="max-height: 70vh; border-radius: 15px;">
-                        <source src="video2.mp4" type="video/mp4">
-                    </video>
+                    <video controls playsinline><source src="video2.mp4" type="video/mp4"></video>
                 </div>
-            </div>
-            <div class="slider-nav">
-                <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('work-slider', 1)"></i>
-                <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('work-slider', -1)"></i>
             </div>
         </div>
     </div>
@@ -258,138 +241,51 @@
     <div id="feedback-gallery" class="gallery-overlay">
         <span class="close-gallery" onclick="toggleGallery('feedback-gallery')">&times;</span>
         <div class="slider-viewport">
+            <div class="nav-arrow next" onclick="scrollSlider('feedback-slider', 1)"><i class="fas fa-chevron-left"></i></div>
+            <div class="nav-arrow prev" onclick="scrollSlider('feedback-slider', -1)"><i class="fas fa-chevron-right"></i></div>
             <div class="main-slider" id="feedback-slider"></div>
-            <div class="slider-nav">
-                <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('feedback-slider', 1)"></i>
-                <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('feedback-slider', -1)"></i>
-            </div>
         </div>
     </div>
 
-    <div id="item-gallery" class="gallery-overlay">
-        <span class="close-gallery" onclick="toggleGallery('item-gallery')">&times;</span>
-        <div class="slider-viewport">
-            <div class="main-slider" id="item-slider"></div>
-            <div class="slider-nav">
-                <i class="fa-solid fa-chevron-right nav-arrow" onclick="scrollSlider('item-slider', 1)"></i>
-                <i class="fa-solid fa-chevron-left nav-arrow" onclick="scrollSlider('item-slider', -1)"></i>
-            </div>
-        </div>
-    </div>
-
-  
-
-    <footer class="footer">
+    <section>
         <div class="contact-card" data-aos="zoom-in">
-            <span class="section-label">Book Your Appointment</span>
-            <h2 class="section-title" style="margin-bottom: 20px;">בואי נתאם יופי</h2>
-            <p>אני כאן כדי להעניק לך את הטיפול המושלם שמגיע לך.</p>
-            <a href="https://wa.me/972548033717" class="whatsapp-link">
-                <i class="fa-brands fa-whatsapp"></i>
-                דברי איתי בוואטסאפ
-            </a>
-            <p style="margin-top: 20px; font-weight: 700;">054-803-3717</p>
-            <a href="https://www.instagram.com/the_malka_lashes" target="_blank" class="instagram-link">
-            <i class="fa-brands fa-instagram"></i>
-                עקבו אחרינו באינסטגרם
-            </a>
+            <h2>בואי נתאם יופי</h2>
+            <p>054-803-3717</p>
+            <a href="https://wa.me/972548033717" class="whatsapp-link">שלחי לי הודעה</a>
         </div>
-
-        <div class="info-footer">
-            <p>MALKA BOUTIQUE • EST. 2026 • PROFESSIONAL AESTHETICS</p>
-            <p style="margin-top: 10px;">Created for Malka Clinic</p>
-        </div>
-    </footer>
+    </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize Animations
-        AOS.init({
-            duration: 1200,
-            once: false,
-            mirror: true
-        });
+        AOS.init({ duration: 1000, once: true });
 
-        // Gallery Data Generation
-        function createGalleryItems(containerId, prefix, count, isFeedback = false) {
+        function createGalleryItems(containerId, count) {
             const slider = document.getElementById(containerId);
+            if(!slider) return;
             for (let i = 1; i <= count; i++) {
                 const item = document.createElement('div');
                 item.className = 'slider-item';
-                
                 const img = document.createElement('img');
-                const src = isFeedback ? `${i}.jpg` : `${prefix}${i}.jpg`;
-                img.src = src;
-                img.alt = `Gallery Image ${i}`;
-                
-                // Placeholder if image doesn't exist
-                img.onerror = function() {
-                    this.src = `https://via.placeholder.com/800x1200/fdf2f2/3a2d2d?text=Image+${i}`;
-                };
-                
+                img.src = containerId.includes('work') ? `image${i}.jpg` : `${i}.jpg`;
+                img.onerror = () => item.style.display = 'none';
                 item.appendChild(img);
                 slider.appendChild(item);
             }
         }
 
-        // Init Galleries
-        createGalleryItems('work-slider', 'image', 18);
-        createGalleryItems('feedback-slider', '', 23, true);
-        createGalleryItems('item-slider', 'item', 4);
+        createGalleryItems('work-slider', 18);
+        createGalleryItems('feedback-slider', 23);
 
-        // Toggle Overlay Logic
         function toggleGallery(id) {
-            const overlay = document.getElementById(id);
-            if (overlay.classList.contains('overlay-active')) {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.classList.remove('overlay-active');
-                    document.body.style.overflow = 'auto';
-                }, 500);
-            } else {
-                overlay.classList.add('overlay-active');
-                document.body.style.overflow = 'hidden';
-                setTimeout(() => {
-                    overlay.style.opacity = '1';
-                }, 10);
-            }
+            const el = document.getElementById(id);
+            el.classList.toggle('overlay-active');
+            document.body.style.overflow = el.classList.contains('overlay-active') ? 'hidden' : 'auto';
         }
 
-        // Slider Navigation Logic
-     function scrollSlider(id, direction) {
-    const slider = document.getElementById(id);
-    const scrollAmount = slider.clientWidth;
-    // בגלל RTL, אנחנו נכפיל ב-1- כדי שהכיוון יהיה אינטואיטיבי
-    slider.scrollBy({
-        left: direction * scrollAmount * -1, 
-        behavior: 'smooth'
-    });
-}
-        // Close gallery on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") {
-                const activeOverlay = document.querySelector('.overlay-active');
-                if (activeOverlay) toggleGallery(activeOverlay.id);
-            }
-        });
-
-        // Add Floating Effect to Cards
-        document.querySelectorAll('.treatment-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const xPercent = (x / rect.width - 0.5) * 10;
-                const yPercent = (y / rect.height - 0.5) * 10;
-                
-                card.style.transform = `translateY(-15px) rotateX(${-yPercent}deg) rotateY(${xPercent}deg)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
-            });
-        });
+        function scrollSlider(id, dir) {
+            const s = document.getElementById(id);
+            s.scrollBy({ left: dir * s.clientWidth * -1, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>
